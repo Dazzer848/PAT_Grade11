@@ -18,11 +18,17 @@ public class Person {
     private double totalMoneyEarned;
     private String password;
 
-    public Person() throws ClassNotFoundException, SQLException{
-        DB.connect();
-        ResultSet table = DB.query("SELECT * FROM darrenlDB.users;");
-        table.next();
-        
-        System.out.println(table.getString(4));
+    public Person(String inUsername, int numOfOperationsIN, double inTotalMoney, String inPassword) throws ClassNotFoundException, SQLException{
+        this.username = inUsername;
+        this.numOfOperationsIn = numOfOperationsIN;
+        this.totalMoneyEarned = inTotalMoney;
+        this.password = inPassword;
+        }
+    
+    public String getUsername(){
+        return this.username;
     }
-}
+        
+        //DEFINE THESE CLASSES. ALL YOU NEED TO DO IS SET A WHILE LOOP AND IT CAN POPULATE THE FIELDS OF TH OBJECCT
+    }
+

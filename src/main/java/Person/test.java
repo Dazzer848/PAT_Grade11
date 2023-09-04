@@ -12,6 +12,8 @@ import java.sql.SQLException;
  */
 public class test {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Person p = new Person();
+        PersonManager manager = new PersonManager();
+        
+        manager.toString("Dazzer");
     }
 }
