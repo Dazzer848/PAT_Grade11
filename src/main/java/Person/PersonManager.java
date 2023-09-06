@@ -20,7 +20,7 @@ public class PersonManager {
     private int size = 0;
 
     public PersonManager() throws ClassNotFoundException, SQLException {
-        peopleArray[] = new 
+        peopleArray = new Person[100];
         DB.connect();
         ResultSet table = DB.query("SELECT * FROM darrenlDB.users;");
 
