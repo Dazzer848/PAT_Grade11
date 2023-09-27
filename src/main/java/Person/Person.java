@@ -5,6 +5,7 @@
 package Person;
 
 import DBMS.DB;
+import Operation.Operation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,12 +16,14 @@ import java.sql.SQLException;
 public class Person {
     private String username;
     private int numOfOperationsIn;
-    private double totalMoneyEarned;
+    private int totalMoneyEarned;
     private String password;
 
-    public Person(String inUsername, int numOfOperationsIN, double inTotalMoney, String inPassword) throws ClassNotFoundException, SQLException{
+    public Person(String inUsername, Operation[] numOfOperationsIN, int inTotalMoney, String inPassword) throws ClassNotFoundException, SQLException{
         this.username = inUsername;
-        this.numOfOperationsIn = numOfOperationsIN;
+        
+        //Want to make an Operations array
+        this.numOfOperationsIn = new Operation[100];
         this.totalMoneyEarned = inTotalMoney;
         this.password = inPassword;
         }
@@ -28,7 +31,38 @@ public class Person {
     public String getUsername(){
         return this.username;
     }
-        
-        //DEFINE THESE CLASSES. ALL YOU NEED TO DO IS SET A WHILE LOOP AND IT CAN POPULATE THE FIELDS OF TH OBJECCT
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setNumOfOperationsIn(int numOfOperationsIn) {
+        this.numOfOperationsIn = numOfOperationsIn;
+    }
+
+    public void setTotalMoneyEarned(int totalMoneyEarned) {
+        this.totalMoneyEarned = totalMoneyEarned;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getNumOfOperationsIn() {
+        return numOfOperationsIn;
+    }
+
+    public double getTotalMoneyEarned() {
+        return totalMoneyEarned;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+   public void updateTotralMoneyEarned(double inputAmount) throws ClassNotFoundException, SQLException{
+       PersonManager p = new PersonManager();
+       totalMoneyEarned += inputAmount;
+       p.updateTotalMoneyEarned(username, totalMoneyEarned);
+   }
     }
 

@@ -4,31 +4,47 @@
  */
 package Operation;
 
+import Person.Person;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author dazzl
  */
 public class Operation {
     private String name;
-    private int dateOfOperation;
-    //private Person[] operators;
+    private LocalDateTime dateOfOperation;
+    private Person[] operators;
     private int totalMoneyMade;
     private int TAFpaid;
     private double paymentPerOperator;
     private String comments;
     private String briefing;
 
+    public Operation(String name, LocalDateTime dateOfOperation, Person[] operators, int totalMoneyMade, int TAFpaid, double paymentPerOperator, String comments, String briefing) {
+        this.name = name;
+        this.dateOfOperation = dateOfOperation;
+        this.operators = operators;
+        this.totalMoneyMade = totalMoneyMade;
+        this.TAFpaid = TAFpaid;
+        this.paymentPerOperator = paymentPerOperator;
+        this.comments = comments;
+        this.briefing = briefing;
+    }
+    
+    
+
     public String getName() {
         return name;
     }
 
-    public int getDateOfOperation() {
+    public LocalDateTime getDateOfOperation() {
         return dateOfOperation;
     }
 
-//    public Person[] getOperators() {
-//        return operators;
-//    }
+    public Person[] getOperators() {
+        return operators;
+    }
 
     public int getTotalMoneyMade() {
         return totalMoneyMade;
@@ -50,13 +66,13 @@ public class Operation {
         this.name = name;
     }
 
-    public void setDateOfOperation(int dateOfOperation) {
+    public void setDateOfOperation(LocalDateTime dateOfOperation) {
         this.dateOfOperation = dateOfOperation;
     }
 
-//    public void setOperators(Person[] operators) {
-//        this.operators = operators;
-//    }
+    public void setOperators(Person[] operators) {
+        this.operators = operators;
+    }
 
     public void setTotalMoneyMade(int totalMoneyMade) {
         this.totalMoneyMade = totalMoneyMade;
