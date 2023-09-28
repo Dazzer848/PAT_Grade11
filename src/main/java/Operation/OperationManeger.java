@@ -4,11 +4,15 @@
  */
 package Operation;
 
+import DBMS.DB;
 import java.time.LocalDateTime;
 import Person.Person;
+import Person.PersonManager;
 import java.sql.Array;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Scanner;
 /**
  *
  * @author dazzl
@@ -16,19 +20,52 @@ import java.util.HashSet;
 public class OperationManeger {
     int size;
     Operation[] operationsArray;
+    int sizeOfPeopleArray = 0;
 
-    public OperationManeger() {
+    public OperationManeger() throws ClassNotFoundException, SQLException {
         operationsArray = new Operation[100];
         
-        //Connect!
-        //Load all the things into the class
+        DB.connect();
+        ResultSet table = DB.query("SELECT * FROM darrenlDB.operations");
+        while(table.next()){
+            String nameOfOperation = table.getString(1);
+            Person[] usersWhoPatook = new Person[100];
+            
+            
+            
+            //This is adding the list of users who partook in that operation
+            PersonManager manaeger = new PersonManager();
+            
+            
+                String userssWhoPartook = table.getString(3);
+                Scanner lineSC = new Scanner(userssWhoPartook).useDelimiter(",");
+                while(lineSC.hasNext()){
+                    int IDofUser = (int)(lineSC.nextInt());
+                    Person p = manaeger.searchForPersonUsingID(IDofUser);
+                    usersWhoPatook[sizeOfPeopleArray] = p;
+                    sizeOfPeopleArray++;
+                    
+                    
+                    
+                }
+                //int totalMoneymade = getThing from table;
+                //int TAF paid = get thing from table
+                //double PayementPerOperatior = get thingfrom table
+                //String comments = get thing from tabke
+                //int IDofOperation = get thing from table
+                
+                //Operation o = new Operation(THINGTHINGDBJASDHFAHSDPF);
+                //operationsArray[size] = o;
+                //size++;
+                        
+        }
         
     }
     
     
     
     public Operation searchForOperation(String operationNameToLookFor){
-        
+       
         //Loops trough the array of operations to see if it can find the Name field of an operation that equals the one they want to find
         for(int i = 0; i < size; i++){
             if(operationsArray[i].getName().equalsIgnoreCase(operationNameToLookFor)){
@@ -40,11 +77,22 @@ public class OperationManeger {
         return null;
     }
     
+    public Operation searchForOperationViaIDD(int ID){
+                //Loops trough the array of operations to see if it can find the Name field of an operation that equals the one they want to find
+        for(int i = 0; i < size; i++){
+            if(operationsArray[i].getID() == ID){
+                return operationsArray[i];
+            }
+           
+        }
+        return null;
+    }
+    
     // This creates an entirely new Operation
     // Note how some field are missing this is due to the fact that we dont need to populate them as of yet
     //Ask Mr B for help with this fact
     public Operation createNewOperation(String inName, LocalDateTime inDate, Person[] operatorsIn, String inBriefing){
-        Operation o = new Operation(inName,inDate,operatorsIn,-1,-1,-1,"",inBriefing);
+        Operation o = new Operation(inName,operatorsIn,-1,-1,-1,"",inBriefing, 0);
         
         return o;
     }

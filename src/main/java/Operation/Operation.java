@@ -13,26 +13,44 @@ import java.time.LocalDateTime;
  */
 public class Operation {
     private String name;
-    private LocalDateTime dateOfOperation;
+    //private LocalDateTime dateOfOperation;
     private Person[] operators;
     private int totalMoneyMade;
     private int TAFpaid;
     private double paymentPerOperator;
     private String comments;
     private String briefing;
-
-    public Operation(String name, LocalDateTime dateOfOperation, Person[] operators, int totalMoneyMade, int TAFpaid, double paymentPerOperator, String comments, String briefing) {
+    private int ID;
+    
+    // We will work the ID's based off of the size of the array. We will set the ID to size as this is always more than the index of 
+    
+    public Operation(String name, Person[] operators, int totalMoneyMade, int TAFpaid, double paymentPerOperator, String comments, String briefing, int ID) {
         this.name = name;
-        this.dateOfOperation = dateOfOperation;
+        //this.dateOfOperation = dateOfOperation;
         this.operators = operators;
         this.totalMoneyMade = totalMoneyMade;
         this.TAFpaid = TAFpaid;
         this.paymentPerOperator = paymentPerOperator;
         this.comments = comments;
         this.briefing = briefing;
+        this.ID = ID;
     }
-    
-    
+
+    public int getTAFpaid() {
+        return TAFpaid;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setTAFpaid(int TAFpaid) {
+        this.TAFpaid = TAFpaid;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public String getName() {
         return name;

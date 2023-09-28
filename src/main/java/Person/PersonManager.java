@@ -6,8 +6,10 @@ package Person;
 
 import DBMS.DB;
 import Operation.Operation;
+import Operation.OperationManeger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,9 +21,12 @@ public class PersonManager {
 
     private Person[] peopleArray;
     private int size = 0;
+    private int sizeOfOperationsArray = 0;
 
     public PersonManager() throws ClassNotFoundException, SQLException {
         peopleArray = new Person[100];
+        Operation[] OperationsIN = new Operation[100];
+        
         DB.connect();
         ResultSet table = DB.query("SELECT * FROM darrenlDB.users;");
 
@@ -29,15 +34,33 @@ public class PersonManager {
             while (table.next()) {
                 String username = table.getString(1);
                 
+                
+                OperationManeger maneger = new OperationManeger();
+                
                 //NEED TO GET THE OPERATION ARRAY HERE
-                int numOfOperationsIn = table.getInt(2);
+                String operations = table.getString(3);
+                Scanner lineSC = new Scanner(operations).useDelimiter(",");
+                while(lineSC.hasNext()){
+                    int IDofOperation = (int)(lineSC.nextInt());
+                    Operation o = maneger.searchForOperationViaIDD(IDofOperation);
+                    OperationsIN[sizeOfOperationsArray] = o;
+                    sizeOfOperationsArray++;
+                    
+                    
+                    
+                }
+                
+                //How to get the object arrays!
+                //Firstly populate the objects array, then loop through the names of the operations the user was in and then go from there!
+                // what we can do it extract the ID's of the operations and use a scanner on that string and then
                 
                 
-                
+                // ENSURE YOU CHANGE THE COLLUM HEADER!
+                int ID = table.getInt(3);
                 int totalMoneyEarned = table.getInt(3);
                 String password = table.getString(4);
 
-                Person p = new Person(username, numOfOperationsIn, totalMoneyEarned, password);
+                Person p = new Person(username, OperationsIN, totalMoneyEarned, password, ID);
                 peopleArray[size] = p;
                 size++;
 
@@ -59,15 +82,6 @@ public class PersonManager {
         return usernametooFind;
     }
     
-    public void updateNumOperations(String usernameToUpdate, int newNumberOfOperationsw){
-        for(int i = 0; i <= size; i++){
-            if(peopleArray[i].getUsername().equals(usernameToUpdate)){
-                peopleArray[i].setNumOfOperationsIn(newNumberOfOperationsw);
-                break;
-            }
-        }
-        System.out.println("Couldnt find that Person");
-    }
     
      public void updateTotalMoneyEarned(String usernameToUpdate, int newTotalMoneyEarned){
         for(int i = 0; i <= size; i++){
@@ -91,5 +105,16 @@ public class PersonManager {
          
          public int getSize(){
              return size;
+         }
+         
+         
+         public Person searchForPersonUsingID(int id) {
+             for(int i = 0; i < size; i++){
+                 if(peopleArray[i].getID() == id){
+                     return peopleArray[i];
+                 }
+             }
+             System.out.println("Could find this person");
+             return null;
          }
 }

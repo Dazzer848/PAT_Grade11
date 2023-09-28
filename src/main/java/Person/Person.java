@@ -15,13 +15,14 @@ import java.sql.SQLException;
  */
 public class Person {
     private String username;
-    private int numOfOperationsIn;
+    private Operation[] numOfOperationsIn;
     private int totalMoneyEarned;
     private String password;
+    private int ID;
 
-    public Person(String inUsername, Operation[] numOfOperationsIN, int inTotalMoney, String inPassword) throws ClassNotFoundException, SQLException{
+    public Person(String inUsername, Operation[] OperationsIN, int inTotalMoney, String inPassword, int inID) throws ClassNotFoundException, SQLException{
         this.username = inUsername;
-        
+        this.ID = inID;
         //Want to make an Operations array
         this.numOfOperationsIn = new Operation[100];
         this.totalMoneyEarned = inTotalMoney;
@@ -36,7 +37,7 @@ public class Person {
         this.username = username;
     }
 
-    public void setNumOfOperationsIn(int numOfOperationsIn) {
+    public void setNumOfOperationsIn(Operation[] numOfOperationsIn) {
         this.numOfOperationsIn = numOfOperationsIn;
     }
 
@@ -48,7 +49,7 @@ public class Person {
         this.password = password;
     }
 
-    public int getNumOfOperationsIn() {
+    public Operation[] getNumOfOperationsIn() {
         return numOfOperationsIn;
     }
 
@@ -63,6 +64,10 @@ public class Person {
        PersonManager p = new PersonManager();
        totalMoneyEarned += inputAmount;
        p.updateTotalMoneyEarned(username, totalMoneyEarned);
+   }
+   
+   public int getID(){
+       return ID;
    }
     }
 
