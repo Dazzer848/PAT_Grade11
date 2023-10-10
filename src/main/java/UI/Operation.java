@@ -4,6 +4,11 @@
  */
 package UI;
 
+import Operation.OperationManeger;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dazzl
@@ -180,7 +185,23 @@ public class Operation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Operation().setVisible(true);
+                try {
+                    new Operation().setVisible(true);
+                    
+                    OperationManeger operationsManager = new OperationManeger();
+                    operationsManager.searchForOperation(// THIS IS WHERE THE NAME OF THE OPERATION GOES);
+                    
+                    
+                    // Need to get the ID of the operation this user is looking for!
+                    OutlinesAndGoalsForOperationTextArea.setText()
+                            
+                            
+                            
+                            } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

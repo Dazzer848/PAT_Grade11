@@ -88,6 +88,8 @@ public class PersonManager {
             if(peopleArray[i].getUsername().equals(usernameToUpdate)){
                 peopleArray[i].setTotalMoneyEarned(newTotalMoneyEarned);
                 break;
+                
+                //Update the DBMS with this user's colum
             }
         }
         System.out.println("Couldnt find that Person");
@@ -97,6 +99,8 @@ public class PersonManager {
         for(int i = 0; i <= size; i++){
             if(peopleArray[i].getUsername().equals(usernameToUpdate)){
                 peopleArray[i].setPassword(newPassword);
+                
+                //Find this user in the database and update the DBMS
                 break;
             }
         }
@@ -116,5 +120,35 @@ public class PersonManager {
              }
              System.out.println("Could find this person");
              return null;
+         }
+         
+         public void createNewPerson(String username, String password){
+             
+             //Put the SQL query in here
+         }
+         public boolean canLogIng(String username, String password){
+             boolean canLogIn = false;
+             
+             
+             for(int i = 0; i < size; i++){
+                 
+             
+             if(username.equals(peopleArray[size].getUsername())){
+                 if(password.equals(peopleArray[size].getPassword())){
+                     canLogIn = true;
+                     return canLogIn;
+                 }
+             }
+         }
+             return canLogIn;
+         }
+         public boolean checkPasswordMatches(String password, String confirmPassword){
+             boolean isTheSame = false;
+             
+             if(password.equals(confirmPassword)){
+                 isTheSame = true;
+                 return isTheSame;
+             }
+             return isTheSame;
          }
 }

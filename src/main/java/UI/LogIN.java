@@ -4,6 +4,11 @@
  */
 package UI;
 
+import Person.PersonManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dazzl
@@ -46,6 +51,11 @@ public class LogIN extends javax.swing.JFrame {
         PasswordLabel.setText("Password:");
 
         LogInButton.setText("LOG IN");
+        LogInButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogInButtonActionPerformed(evt);
+            }
+        });
 
         ErrorDisplay.setColumns(20);
         ErrorDisplay.setRows(5);
@@ -117,6 +127,27 @@ public class LogIN extends javax.swing.JFrame {
     private void EnlistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnlistButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EnlistButtonActionPerformed
+
+    private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
+        try {
+            PersonManager managar = new PersonManager();
+            boolean canLogIn = managar.canLogIng(usernameTextField.getText(), passwordTextField.getText());
+            
+            if(canLogIn = true){
+                // shut down this screen and move onto the dashboard
+            }
+            else{
+                ErrorDisplay.setText("Your username or password is incorrect");
+            }
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogIN.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogIN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_LogInButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -17,14 +17,14 @@ public class Operation {
     private Person[] operators;
     private int totalMoneyMade;
     private int TAFpaid;
-    private double paymentPerOperator;
+    private int paymentPerOperator;
     private String comments;
     private String briefing;
     private int ID;
     
     // We will work the ID's based off of the size of the array. We will set the ID to size as this is always more than the index of 
     
-    public Operation(String name, Person[] operators, int totalMoneyMade, int TAFpaid, double paymentPerOperator, String comments, String briefing, int ID) {
+    public Operation(String name, Person[] operators, int totalMoneyMade, int TAFpaid, int paymentPerOperator, String comments, String briefing, int ID) {
         this.name = name;
         //this.dateOfOperation = dateOfOperation;
         this.operators = operators;
@@ -44,8 +44,9 @@ public class Operation {
         return ID;
     }
 
-    public void setTAFpaid(int TAFpaid) {
-        this.TAFpaid = TAFpaid;
+    public void setTAFpaid() {
+        this.TAFpaid = (int) (totalMoneyMade * 0.005);
+        //Update DBMS
     }
 
     public void setID(int ID) {
@@ -56,9 +57,9 @@ public class Operation {
         return name;
     }
 
-    public LocalDateTime getDateOfOperation() {
-        return dateOfOperation;
-    }
+    //public LocalDateTime getDateOfOperation() {     
+        //return dateOfOperation;
+    //}
 
     public Person[] getOperators() {
         return operators;
@@ -96,8 +97,8 @@ public class Operation {
         this.totalMoneyMade = totalMoneyMade;
     }
 
-    public void setPaymentPerOperator(double paymentPerOperator) {
-        this.paymentPerOperator = paymentPerOperator;
+    public void setPaymentPerOperator(int paymentPerOperator) {
+        this.paymentPerOperator = (int) paymentPerOperator;
     }
 
     public void setComments(String comments) {

@@ -24,14 +24,12 @@ public class OperationManeger {
 
     public OperationManeger() throws ClassNotFoundException, SQLException {
         operationsArray = new Operation[100];
+        Person[] usersWhoPatook = new Person[100];
         
         DB.connect();
         ResultSet table = DB.query("SELECT * FROM darrenlDB.operations");
         while(table.next()){
-            String nameOfOperation = table.getString(1);
-            Person[] usersWhoPatook = new Person[100];
-            
-            
+            String nameOfOperation = table.getString(1);    
             
             //This is adding the list of users who partook in that operation
             PersonManager manaeger = new PersonManager();
@@ -91,10 +89,13 @@ public class OperationManeger {
     // This creates an entirely new Operation
     // Note how some field are missing this is due to the fact that we dont need to populate them as of yet
     //Ask Mr B for help with this fact
-    public Operation createNewOperation(String inName, LocalDateTime inDate, Person[] operatorsIn, String inBriefing){
+    public void createNewOperation(String inName, LocalDateTime inDate, Person[] operatorsIn, String inBriefing){
         Operation o = new Operation(inName,operatorsIn,-1,-1,-1,"",inBriefing, 0);
         
-        return o;
+        operationsArray[size] = o;
+        size++;
+        
+        // This operation must be snent to the DBMS! Ensure that you can send it through!
     }
     
     public void deleteOperation(){
@@ -158,7 +159,7 @@ public class OperationManeger {
                        
                        for(int f = 0; f <= size - 1; f++){
                            operatiors[f].updateTotralMoneyEarned(paymentPerOperator);
-                       }
+                      }
                        
                    }
                

@@ -4,6 +4,11 @@
  */
 package UI;
 
+import Person.PersonManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dazzl
@@ -34,6 +39,8 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         ConfirmPasswordLabel = new javax.swing.JLabel();
         ConfirmPasswordtextField = new javax.swing.JPasswordField();
         EnlistButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DIsplayTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,15 +53,26 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         ConfirmPasswordLabel.setText("Confirm Password:");
 
         EnlistButton.setText("ENLIST!");
+        EnlistButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnlistButtonActionPerformed(evt);
+            }
+        });
+
+        DIsplayTextArea.setColumns(20);
+        DIsplayTextArea.setRows(5);
+        jScrollPane1.setViewportView(DIsplayTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(EnlistButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(WelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -70,8 +88,7 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                                 .addComponent(ConfirmPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ConfirmPasswordtextField)))
-                        .addGap(0, 119, Short.MAX_VALUE))
-                    .addComponent(EnlistButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 119, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -92,12 +109,36 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                     .addComponent(ConfirmPasswordLabel)
                     .addComponent(ConfirmPasswordtextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EnlistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EnlistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnlistButtonActionPerformed
+        try {
+            PersonManager manager = new PersonManager();
+            
+            boolean isTheSame = manager.checkPasswordMatches(PasswordTextField.getText(), ConfirmPasswordtextField.getText());
+            
+            if(isTheSame = true){
+                //Dipose this screen
+            }
+            else{
+                DIsplayTextArea.setText("Your passwords do not match.");
+            }
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CreateAccountScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccountScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_EnlistButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,11 +179,13 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ConfirmPasswordLabel;
     private javax.swing.JPasswordField ConfirmPasswordtextField;
+    private javax.swing.JTextArea DIsplayTextArea;
     private javax.swing.JButton EnlistButton;
     private javax.swing.JLabel PasswordLable;
     private javax.swing.JPasswordField PasswordTextField;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
