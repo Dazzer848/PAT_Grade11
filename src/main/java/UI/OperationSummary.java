@@ -4,6 +4,12 @@
  */
 package UI;
 
+import Operation.OperationManeger;
+import Operation.Operations;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dazzl
@@ -272,7 +278,27 @@ public class OperationSummary extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OperationSummary().setVisible(true);
+                try {
+                    new OperationSummary().setVisible(true);
+                    
+                    //Find the operation the user is looking for a summary for
+
+                    OperationManeger manager = new OperationManeger();
+                    //Operations o = manager.searchForOperation(operationNameToLookFor);
+                    
+                    //Set this to display no idea why it has this error 
+                    //DebriefCommentsTextArea.setText(o.getComments());
+                    //PerOperatorPaymentOutput.setText(o.getPaymentPerOperator() + "");
+                    //TotalTAFOutput.setText(o.getTAFpaid() + "");
+                    //UsersWhoPartookDisplayTextArea.setText(o.toStringUsers());
+                    
+                    
+                    
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

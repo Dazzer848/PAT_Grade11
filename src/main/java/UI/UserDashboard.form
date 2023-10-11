@@ -110,37 +110,40 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="operationButton3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
+            <Property name="text" type="java.lang.String" value="Simple salvage"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="operationButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton2"/>
+            <Property name="text" type="java.lang.String" value="My oh my!?!"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="operationButton5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton3"/>
+            <Property name="text" type="java.lang.String" value="Hunting Holidays"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="operationButton6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton4"/>
+            <Property name="text" type="java.lang.String" value="Great Gatsby&apos;s house?"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="operationButton6ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="operationButton7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton5"/>
+            <Property name="text" type="java.lang.String" value="The end!"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="operationButton2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton6"/>
+            <Property name="text" type="java.lang.String" value="Breaker yard blockade"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="operationButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Jbutton6"/>
+            <Property name="text" type="java.lang.String" value="Chrome spoon"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -385,6 +388,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Calculate"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CalculateButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="TotalInTextField">
           <Events>

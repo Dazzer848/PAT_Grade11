@@ -64,19 +64,24 @@ public class UserDashboard extends javax.swing.JFrame {
 
         OperationsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        operationButton3.setText("jButton1");
+        operationButton3.setText("Simple salvage");
 
-        operationButton4.setText("jButton2");
+        operationButton4.setText("My oh my!?!");
 
-        operationButton5.setText("jButton3");
+        operationButton5.setText("Hunting Holidays");
 
-        operationButton6.setText("jButton4");
+        operationButton6.setText("Great Gatsby's house?");
+        operationButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operationButton6ActionPerformed(evt);
+            }
+        });
 
-        operationButton7.setText("jButton5");
+        operationButton7.setText("The end!");
 
-        operationButton2.setText("jButton6");
+        operationButton2.setText("Breaker yard blockade");
 
-        operationButton1.setText("Jbutton6");
+        operationButton1.setText("Chrome spoon");
 
         javax.swing.GroupLayout OperationsPanelLayout = new javax.swing.GroupLayout(OperationsPanel);
         OperationsPanel.setLayout(OperationsPanelLayout);
@@ -183,6 +188,11 @@ public class UserDashboard extends javax.swing.JFrame {
         PaymentToMarauderSquadron.setText("Payment to Marauder");
 
         CalculateButton.setText("Calculate");
+        CalculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalculateButtonActionPerformed(evt);
+            }
+        });
 
         TotalInTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,6 +307,14 @@ public class UserDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TotalInTextFieldActionPerformed
 
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        calculator(Integer.parseInt(TotalInTextField.getText()), Integer.parseInt(NumberOfUsersIntextField.getText()), Integer.parseInt(MarauderSquadInTextField.getText()));
+    }//GEN-LAST:event_CalculateButtonActionPerformed
+
+    private void operationButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operationButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_operationButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -330,6 +348,21 @@ public class UserDashboard extends javax.swing.JFrame {
                 new UserDashboard().setVisible(true);
             }
         });
+    }
+    
+    public void calculator(int total, int numberOfUser, int marauderSquadronCut){
+        int totalProfits = 0;
+        int PaymentPerUser = 0;
+        int PaymentToMaruader = 0;
+        
+        totalProfits = (int) (total - (total*0.005));
+        
+        PaymentToMaruader = (int) (totalProfits * marauderSquadronCut);
+        PaymentPerUser = (totalProfits -  PaymentToMaruader) / numberOfUser;
+        
+        TotalProfitsOutTextField.setText(totalProfits + "");
+        PaymentToMarauderOut.setText(PaymentToMaruader + "");
+        PaymentPerUserOutTextField.setText(PaymentPerUser + "");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

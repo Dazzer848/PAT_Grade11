@@ -125,6 +125,8 @@ public class CreateAccountScreen extends javax.swing.JFrame {
             boolean isTheSame = manager.checkPasswordMatches(PasswordTextField.getText(), ConfirmPasswordtextField.getText());
             
             if(isTheSame = true){
+                dispose();
+                new UserDashboard().setVisible(true);
                 //Dipose this screen
             }
             else{

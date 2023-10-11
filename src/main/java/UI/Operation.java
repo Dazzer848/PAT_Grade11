@@ -8,7 +8,7 @@ import Operation.OperationManeger;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import Operation.Operations;
 /**
  *
  * @author dazzl
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class Operation extends javax.swing.JFrame {
 
     /**
-     * Creates new form Operation
+     * Creates new form Operations
      */
     public Operation() {
         initComponents();
@@ -172,14 +172,15 @@ public class Operation extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Operation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Operation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Operation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Operation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -189,18 +190,19 @@ public class Operation extends javax.swing.JFrame {
                     new Operation().setVisible(true);
                     
                     OperationManeger operationsManager = new OperationManeger();
-                    operationsManager.searchForOperation(// THIS IS WHERE THE NAME OF THE OPERATION GOES);
-                    
+                    Operations th = operationsManager.searchForOperation("Operaton");
+                    String Outline = th.getBriefing();
                     
                     // Need to get the ID of the operation this user is looking for!
-                    OutlinesAndGoalsForOperationTextArea.setText()
+                    // Once got the ID it refrences the fact that I cant reference something that is not static need to help
+                    //OutlinesAndGoalsForOperationTextArea.setText(Outline);
                             
                             
                             
                             } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

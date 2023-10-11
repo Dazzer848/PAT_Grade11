@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  *
  * @author dazzl
  */
-public class Operation {
+public class Operations {
     private String name;
     //private LocalDateTime dateOfOperation;
     private Person[] operators;
@@ -21,10 +21,9 @@ public class Operation {
     private String comments;
     private String briefing;
     private int ID;
-    
     // We will work the ID's based off of the size of the array. We will set the ID to size as this is always more than the index of 
     
-    public Operation(String name, Person[] operators, int totalMoneyMade, int TAFpaid, int paymentPerOperator, String comments, String briefing, int ID) {
+    public Operations(String name, Person[] operators, int totalMoneyMade, int TAFpaid, int paymentPerOperator, String comments, String briefing, int ID) {
         this.name = name;
         //this.dateOfOperation = dateOfOperation;
         this.operators = operators;
@@ -69,7 +68,7 @@ public class Operation {
         return totalMoneyMade;
     }
 
-    public double getPaymentPerOperator() {
+    public int getPaymentPerOperator() {
         return paymentPerOperator;
     }
 
@@ -80,13 +79,14 @@ public class Operation {
     public String getBriefing() {
         return briefing;
     }
-
+    
+    
     public void setName(String name) {
         this.name = name;
     }
 
     public void setDateOfOperation(LocalDateTime dateOfOperation) {
-        this.dateOfOperation = dateOfOperation;
+//        this.dateOfOperation = dateOfOperation;
     }
 
     public void setOperators(Person[] operators) {
@@ -109,5 +109,13 @@ public class Operation {
         this.briefing = briefing;
     }
     
+    public String toStringUsers(){
+        
+        String toDisplay = "";
+        for(int i = 1; i < operators.length; i++){
+            toDisplay += operators[i].getUsername() + "\n";
+        }
+        return toDisplay;
+    }
     
 }

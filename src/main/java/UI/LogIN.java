@@ -125,7 +125,8 @@ public class LogIN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EnlistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnlistButtonActionPerformed
-        // TODO add your handling code here:
+        // Dispose of this screen
+        // make the Enlist screen visible
     }//GEN-LAST:event_EnlistButtonActionPerformed
 
     private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
