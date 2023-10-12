@@ -4,6 +4,13 @@
  */
 package UI;
 
+import Operation.OperationsManager2;
+import Person.Person2;
+import Person.PersonManager2;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dazzl
@@ -14,7 +21,19 @@ public class UserDashboard extends javax.swing.JFrame {
      * Creates new form UserDashboard
      */
     public UserDashboard() {
-        initComponents();
+        try {
+            initComponents();
+            
+            PersonManager2 manager = new PersonManager2();
+            Person2 currentUser = manager.getCurrentUser();
+            String username = currentUser.getUsername();
+            
+            headerLabel.setText("-------------------------------------- Welcome " + username + "---------------------------------");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,6 +101,11 @@ public class UserDashboard extends javax.swing.JFrame {
         operationButton2.setText("Breaker yard blockade");
 
         operationButton1.setText("Chrome spoon");
+        operationButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operationButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout OperationsPanelLayout = new javax.swing.GroupLayout(OperationsPanel);
         OperationsPanel.setLayout(OperationsPanelLayout);
@@ -122,6 +146,11 @@ public class UserDashboard extends javax.swing.JFrame {
         PaymentsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         orgAccountPaymentButton.setText("Payment to Org Account");
+        orgAccountPaymentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orgAccountPaymentButtonActionPerformed(evt);
+            }
+        });
 
         TradeGoodsSoldButton.setText("Log Trade goods sold");
 
@@ -315,6 +344,18 @@ public class UserDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_operationButton6ActionPerformed
 
+    private void operationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operationButton1ActionPerformed
+        int ID = 1;
+        new Operation().setVisible(true);
+        // HOW CAN I REFERENCE CODE HERE
+        //manager.populateOperationsUI(OutlinesAndGoalsForOperationTextArea, DateTimeAndUsersTextArea, EquipmentNeededTextArea, OperationHeader, ID);
+        dispose();
+    }//GEN-LAST:event_operationButton1ActionPerformed
+
+    private void orgAccountPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orgAccountPaymentButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orgAccountPaymentButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,17 +390,17 @@ public class UserDashboard extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void calculator(int total, int numberOfUser, int marauderSquadronCut){
+
+    public void calculator(int total, int numberOfUser, int marauderSquadronCut) {
         int totalProfits = 0;
         int PaymentPerUser = 0;
         int PaymentToMaruader = 0;
-        
-        totalProfits = (int) (total - (total*0.005));
-        
+
+        totalProfits = (int) (total - (total * 0.005));
+
         PaymentToMaruader = (int) (totalProfits * marauderSquadronCut);
-        PaymentPerUser = (totalProfits -  PaymentToMaruader) / numberOfUser;
-        
+        PaymentPerUser = (totalProfits - PaymentToMaruader) / numberOfUser;
+
         TotalProfitsOutTextField.setText(totalProfits + "");
         PaymentToMarauderOut.setText(PaymentToMaruader + "");
         PaymentPerUserOutTextField.setText(PaymentPerUser + "");

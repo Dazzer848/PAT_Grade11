@@ -5,14 +5,14 @@
 package Operation;
 
 import java.sql.SQLException;
-
+import Operation.OperationsManager2;
 /**
  *
  * @author dazzl
  */
 public class testingV2 {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        OperationManeger manager = new OperationManeger();
+        OperationsManager2 manager = new OperationsManager2();
         
     }
     

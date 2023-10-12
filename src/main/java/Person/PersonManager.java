@@ -49,7 +49,7 @@ public class PersonManager {
                     OperationsIN[sizeOfOperationsArray] = o;
                     sizeOfOperationsArray++;
                     
-                                    Person p = new Person(username, OperationsIN, totalEarned, password, ID);
+                Person p = new Person(username, OperationsIN, totalEarned, password, ID);
                 peopleArray[size] = p;
                 size++;
 
@@ -129,9 +129,11 @@ public class PersonManager {
              return null;
          }
          
-         public void createNewPerson(String username, String password){
+         public void createNewPerson(String username, String password) throws SQLException{
              
-             //Put the SQL query in here
+             // How do I insert the Strings I get from this method into the method!
+             //DB.query("INSERT INTO `darrenlDB`.`users` (`username`, `password`, `ID`) VALUES ("usernmae", "password", "2");");
+             
          }
          public boolean canLogIng(String username, String password){
              boolean canLogIn = false;

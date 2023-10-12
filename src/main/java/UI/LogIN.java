@@ -5,6 +5,7 @@
 package UI;
 
 import Person.PersonManager;
+import Person.PersonManager2;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,27 +126,21 @@ public class LogIN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EnlistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnlistButtonActionPerformed
-        // Dispose of this screen
+        dispose();
+        new CreateAccountScreen().setVisible(true);
         // make the Enlist screen visible
     }//GEN-LAST:event_EnlistButtonActionPerformed
 
     private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
-        try {
-            PersonManager managar = new PersonManager();
-            boolean canLogIn = managar.canLogIng(usernameTextField.getText(), passwordTextField.getText());
-            
-            if(canLogIn = true){
-                // shut down this screen and move onto the dashboard
-            }
-            else{
-                ErrorDisplay.setText("Your username or password is incorrect");
-            }
-            
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LogIN.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(LogIN.class.getName()).log(Level.SEVERE, null, ex);
+        boolean canLogIn = PersonManager2.canLogIn(usernameTextField, passwordTextField);
+        if(canLogIn = true){
+            dispose();
+            PersonManager2 manager = new PersonManager2();
+            manager.setCurrentUser(usernameTextField.getText());
+            new UserDashboard().setVisible(true);
+        }
+        else{
+            ErrorDisplay.setText("Your username or password is incorrect");
         }
         
     }//GEN-LAST:event_LogInButtonActionPerformed

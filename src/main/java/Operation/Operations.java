@@ -21,9 +21,11 @@ public class Operations {
     private String comments;
     private String briefing;
     private int ID;
+    private String equipment;
+    private int nuimberOfPeople;
     // We will work the ID's based off of the size of the array. We will set the ID to size as this is always more than the index of 
     
-    public Operations(String name, Person[] operators, int totalMoneyMade, int TAFpaid, int paymentPerOperator, String comments, String briefing, int ID) {
+    public Operations(String name, Person[] operators, int totalMoneyMade, int TAFpaid, int paymentPerOperator, String comments, String briefing, int ID, String equipment,int numberOf) {
         this.name = name;
         //this.dateOfOperation = dateOfOperation;
         this.operators = operators;
@@ -33,6 +35,8 @@ public class Operations {
         this.comments = comments;
         this.briefing = briefing;
         this.ID = ID;
+        this.equipment = equipment;
+        this.nuimberOfPeople = numberOf;
     }
 
     public int getTAFpaid() {
@@ -60,6 +64,7 @@ public class Operations {
         //return dateOfOperation;
     //}
 
+    //This cant be a static method but it needs to be why?
     public Person[] getOperators() {
         return operators;
     }
@@ -75,7 +80,8 @@ public class Operations {
     public String getComments() {
         return comments;
     }
-
+    
+    // This needs to be a static method but it cant be. Why?
     public String getBriefing() {
         return briefing;
     }
@@ -83,6 +89,12 @@ public class Operations {
     
     public void setName(String name) {
         this.name = name;
+    }
+    
+    
+    // This cant be a static method but it needs to be! How fix
+    public String getEquipment(){
+        return equipment;
     }
 
     public void setDateOfOperation(LocalDateTime dateOfOperation) {

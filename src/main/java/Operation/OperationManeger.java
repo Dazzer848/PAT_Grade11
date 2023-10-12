@@ -7,12 +7,16 @@ package Operation;
 import DBMS.DB;
 import java.time.LocalDateTime;
 import Person.Person;
+import Person.Person2;
 import Person.PersonManager;
+import Person.PersonManager2;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author dazzl
@@ -66,12 +70,12 @@ public class OperationManeger {
             int paymentPerOperator = table.getInt(8);
             int TAFpaid = table.getInt(9);
             String comments = table.getString(10);
-            
+            int numberOf = table.getInt(11);
             
             //NEED TO ERROR CHECK THIS! 
             //Also fix up the ordering of things in the database it looks terrible!
             //Lastly ensure to add a comments column!
-            Operations o = new Operations(nameOfOperation, usersWhoPatook, totalMade, TAFpaid, paymentPerOperator, comments, briefing, ID);
+            Operations o = new Operations(nameOfOperation, usersWhoPatook, totalMade, TAFpaid, paymentPerOperator, comments, briefing, ID, equipment, numberOf);
             operationsArray[size] = o;
             size++;
                         
@@ -109,7 +113,7 @@ public class OperationManeger {
     // Note how some field are missing this is due to the fact that we dont need to populate them as of yet
     //Ask Mr B for help with this fact
     public void createNewOperation(String inName, LocalDateTime inDate, Person[] operatorsIn, String inBriefing){
-        Operations o = new Operations(inName,operatorsIn,-1,-1,-1,"",inBriefing, 0);
+        Operations o = new Operations(inName,operatorsIn,-1,-1,-1,"",inBriefing, 0, "wow", 4);
         
         operationsArray[size] = o;
         size++;
@@ -143,14 +147,12 @@ public class OperationManeger {
         System.out.println("The operation couldnt be found");
     }
     
-       public void updateOperators(Person[] newOperatorList, String OperationToUpdate){
-        for(int i = 0; i <= size; i++){
-           if(operationsArray[i].getName().equals(OperationToUpdate)){
-               operationsArray[i].setOperators(newOperatorList);
-               break;
-           }
-        }
-        System.out.println("The operation couldnt be found");
+       public void updateOperators(int IDofOperationToUpdate, Person userToAdd){
+          Operations op = searchForOperationViaIDD(IDofOperationToUpdate);
+          Person[] listOfUser = op.getOperators();
+          
+          //Need to get the size
+          //listOfUser[]          
     }
            public void updateTotalMoneyMade(int moneyToUpdate, String OperationToUpdate){
         for(int i = 0; i <= size; i++){

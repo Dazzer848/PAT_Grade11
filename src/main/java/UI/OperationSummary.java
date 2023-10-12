@@ -6,6 +6,8 @@ package UI;
 
 import Operation.OperationManeger;
 import Operation.Operations;
+import Operation.OperationsManager2;
+import Person.PersonManager2;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +22,17 @@ public class OperationSummary extends javax.swing.JFrame {
      * Creates new form OperationSummary
      */
     public OperationSummary() {
-        initComponents();
+        try {
+            initComponents();
+            
+            OperationsManager2 manager = new OperationsManager2();
+            
+            manager.populateOperatiosSummary(UsersWhoPartookDisplayTextArea, PerOperatorPaymentOutput, MarauderSquadCutOutput, TotalTAFOutput, DebriefCommentsTextArea, 1);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -42,13 +54,11 @@ public class OperationSummary extends javax.swing.JFrame {
         MarauderSquadCutLabel = new javax.swing.JLabel();
         TotalTAFPaidLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         PerOperatorPaymentOutput = new javax.swing.JTextField();
         MarauderSquadCutOutput = new javax.swing.JTextField();
         TotalTAFOutput = new javax.swing.JTextField();
+        PayOperatorsButton = new javax.swing.JButton();
+        returnHome = new javax.swing.JButton();
         PaymentHeaderLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -91,48 +101,42 @@ public class OperationSummary extends javax.swing.JFrame {
 
         jLabel6.setText("--------------------------------------------");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        PayOperatorsButton.setText("Pay Operators");
+        PayOperatorsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayOperatorsButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setText("jLabel7");
-
-        jLabel8.setText("jLabel8");
-
-        jLabel9.setText("jLabel9");
+        returnHome.setText("Return Home");
+        returnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnHomeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PaymentsPanelLayout = new javax.swing.GroupLayout(PaymentsPanel);
         PaymentsPanel.setLayout(PaymentsPanelLayout);
         PaymentsPanelLayout.setHorizontalGroup(
             PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                        .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(PerOperatorLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(MarauderSquadCutLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TotalTAFPaidLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PaymentsPanelLayout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PaymentsPanelLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(PerOperatorPaymentOutput)
+                            .addComponent(MarauderSquadCutOutput)
+                            .addComponent(TotalTAFOutput)))
+                    .addComponent(PayOperatorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PaymentsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PaymentsPanelLayout.createSequentialGroup()
-                                .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(PerOperatorLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(MarauderSquadCutLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TotalTAFPaidLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PerOperatorPaymentOutput)
-                                    .addComponent(MarauderSquadCutOutput)
-                                    .addComponent(TotalTAFOutput)))
-                            .addGroup(PaymentsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 9, Short.MAX_VALUE)))))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 9, Short.MAX_VALUE))
+                    .addComponent(returnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PaymentsPanelLayout.setVerticalGroup(
@@ -152,15 +156,11 @@ public class OperationSummary extends javax.swing.JFrame {
                     .addComponent(TotalTAFOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jLabel6)
-                .addGap(35, 35, 35)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel7)
+                .addGap(29, 29, 29)
+                .addComponent(PayOperatorsButton)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addComponent(returnHome)
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         PaymentHeaderLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -248,6 +248,16 @@ public class OperationSummary extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void returnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnHomeActionPerformed
+        dispose();
+        new UserDashboard().setVisible(true);
+        
+    }//GEN-LAST:event_returnHomeActionPerformed
+
+    private void PayOperatorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayOperatorsButtonActionPerformed
+        PersonManager2.payPeople(1, Integer.parseInt(PerOperatorPaymentOutput.getText()), Integer.parseInt(MarauderSquadCutOutput.getText()));
+    }//GEN-LAST:event_PayOperatorsButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,27 +288,7 @@ public class OperationSummary extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new OperationSummary().setVisible(true);
-                    
-                    //Find the operation the user is looking for a summary for
-
-                    OperationManeger manager = new OperationManeger();
-                    //Operations o = manager.searchForOperation(operationNameToLookFor);
-                    
-                    //Set this to display no idea why it has this error 
-                    //DebriefCommentsTextArea.setText(o.getComments());
-                    //PerOperatorPaymentOutput.setText(o.getPaymentPerOperator() + "");
-                    //TotalTAFOutput.setText(o.getTAFpaid() + "");
-                    //UsersWhoPartookDisplayTextArea.setText(o.toStringUsers());
-                    
-                    
-                    
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new OperationSummary().setVisible(true);
             }
         });
     }
@@ -308,6 +298,7 @@ public class OperationSummary extends javax.swing.JFrame {
     private javax.swing.JTextArea DebriefCommentsTextArea;
     private javax.swing.JLabel MarauderSquadCutLabel;
     private javax.swing.JTextField MarauderSquadCutOutput;
+    private javax.swing.JButton PayOperatorsButton;
     private javax.swing.JLabel PaymentHeaderLabel;
     private javax.swing.JPanel PaymentsPanel;
     private javax.swing.JLabel PerOperatorLabel;
@@ -317,14 +308,11 @@ public class OperationSummary extends javax.swing.JFrame {
     private javax.swing.JLabel TotalTAFPaidLabel;
     private javax.swing.JTextArea UsersWhoPartookDisplayTextArea;
     private javax.swing.JPanel UsersWhoPartookTextArea;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton returnHome;
     // End of variables declaration//GEN-END:variables
 }

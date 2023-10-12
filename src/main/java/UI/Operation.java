@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Operation.Operations;
+import Operation.OperationsManager2;
 /**
  *
  * @author dazzl
@@ -19,8 +20,17 @@ public class Operation extends javax.swing.JFrame {
      * Creates new form Operations
      */
     public Operation() {
-        initComponents();
-    }
+        initComponents();   
+        OperationsManager2 manager;
+        try {
+            manager = new OperationsManager2();
+            manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader, 1);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,28 +41,28 @@ public class Operation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        OperationHeader = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        OutlinesAndGoalsForOperationTextArea = new javax.swing.JTextArea();
+        BriefingDisplay = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        DateTimeAndUsersTextArea = new javax.swing.JTextArea();
+        UsersDisplay = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        EquipmentNeededTextArea = new javax.swing.JTextArea();
+        EquipmentDisplay = new javax.swing.JTextArea();
         ResgisterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("------------------------------------------------------------------- OPERATION X ------------------------------------------------------------------------------------");
+        OperationHeader.setText("------------------------------------------------------------------- OPERATION X ------------------------------------------------------------------------------------");
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setForeground(new java.awt.Color(153, 153, 255));
 
-        OutlinesAndGoalsForOperationTextArea.setColumns(20);
-        OutlinesAndGoalsForOperationTextArea.setRows(5);
-        jScrollPane1.setViewportView(OutlinesAndGoalsForOperationTextArea);
+        BriefingDisplay.setColumns(20);
+        BriefingDisplay.setRows(5);
+        jScrollPane1.setViewportView(BriefingDisplay);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -60,23 +70,23 @@ public class Operation extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1082, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
         jPanel2.setForeground(new java.awt.Color(153, 153, 255));
 
-        DateTimeAndUsersTextArea.setColumns(20);
-        DateTimeAndUsersTextArea.setRows(5);
-        jScrollPane2.setViewportView(DateTimeAndUsersTextArea);
+        UsersDisplay.setColumns(20);
+        UsersDisplay.setRows(5);
+        jScrollPane2.setViewportView(UsersDisplay);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,22 +94,22 @@ public class Operation extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 255));
 
-        EquipmentNeededTextArea.setColumns(20);
-        EquipmentNeededTextArea.setRows(5);
-        jScrollPane3.setViewportView(EquipmentNeededTextArea);
+        EquipmentDisplay.setColumns(20);
+        EquipmentDisplay.setRows(5);
+        jScrollPane3.setViewportView(EquipmentDisplay);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -107,18 +117,23 @@ public class Operation extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         ResgisterButton.setText("Register");
+        ResgisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResgisterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,19 +143,19 @@ public class Operation extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ResgisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(OperationHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(OperationHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -154,6 +169,21 @@ public class Operation extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ResgisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResgisterButtonActionPerformed
+        try {
+            OperationsManager2 manager = new OperationsManager2();
+            
+            manager.registerForOp(1);
+            manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader, 1);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_ResgisterButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,34 +216,18 @@ public class Operation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Operation().setVisible(true);
-                    
-                    OperationManeger operationsManager = new OperationManeger();
-                    Operations th = operationsManager.searchForOperation("Operaton");
-                    String Outline = th.getBriefing();
-                    
-                    // Need to get the ID of the operation this user is looking for!
-                    // Once got the ID it refrences the fact that I cant reference something that is not static need to help
-                    //OutlinesAndGoalsForOperationTextArea.setText(Outline);
-                            
-                            
-                            
-                            } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Operation().setVisible(true);
+                // I want this screen to be populated by the OperationManager2.populateUI class.
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea DateTimeAndUsersTextArea;
-    private javax.swing.JTextArea EquipmentNeededTextArea;
-    private javax.swing.JTextArea OutlinesAndGoalsForOperationTextArea;
+    private javax.swing.JTextArea BriefingDisplay;
+    private javax.swing.JTextArea EquipmentDisplay;
+    private javax.swing.JLabel OperationHeader;
     private javax.swing.JButton ResgisterButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextArea UsersDisplay;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

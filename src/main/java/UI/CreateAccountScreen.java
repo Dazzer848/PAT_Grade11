@@ -5,6 +5,7 @@
 package UI;
 
 import Person.PersonManager;
+import Person.PersonManager2;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,27 +120,17 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EnlistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnlistButtonActionPerformed
-        try {
-            PersonManager manager = new PersonManager();
-            
-            boolean isTheSame = manager.checkPasswordMatches(PasswordTextField.getText(), ConfirmPasswordtextField.getText());
-            
-            if(isTheSame = true){
-                dispose();
-                new UserDashboard().setVisible(true);
-                //Dipose this screen
-            }
-            else{
-                DIsplayTextArea.setText("Your passwords do not match.");
-            }
-            
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CreateAccountScreen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateAccountScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+       boolean canCreateAccount = PersonManager2.canCreateAccount(UsernameTextField, PasswordTextField, ConfirmPasswordtextField);
+       if(canCreateAccount = true){
+           PersonManager2.createNewAccount(4, UsernameTextField.getText(), PasswordTextField.getText());
+           PersonManager2 manager = new PersonManager2();
+           manager.setCurrentUser(UsernameTextField.getText());
+           dispose();
+           //new UserDashBoard.setVisible(true);
+       }
+       else{
+           DIsplayTextArea.setText("There is an error with your username or password");
+       }
     }//GEN-LAST:event_EnlistButtonActionPerformed
 
     /**

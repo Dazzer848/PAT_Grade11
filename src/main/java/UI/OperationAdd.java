@@ -4,6 +4,11 @@
  */
 package UI;
 
+import Operation.OperationsManager2;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dazzl
@@ -15,6 +20,7 @@ public class OperationAdd extends javax.swing.JFrame {
      */
     public OperationAdd() {
         initComponents();
+        returnHome.setVisible(false);
     }
 
     /**
@@ -30,7 +36,6 @@ public class OperationAdd extends javax.swing.JFrame {
         NameJlabel = new javax.swing.JLabel();
         NameInputTextField = new javax.swing.JTextField();
         DateJLable = new javax.swing.JLabel();
-        DateInputTextField = new javax.swing.JTextField();
         BriefingJlabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         BriefingDisplayInputField = new javax.swing.JTextArea();
@@ -38,6 +43,10 @@ public class OperationAdd extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         EquipmentNeededInputField = new javax.swing.JTextArea();
         AddOperationButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        DisplayTextArea = new javax.swing.JTextArea();
+        rendezvousTextField = new javax.swing.JTextField();
+        returnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,13 +54,7 @@ public class OperationAdd extends javax.swing.JFrame {
 
         NameJlabel.setText("Name: ");
 
-        DateJLable.setText("Date:");
-
-        DateInputTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DateInputTextFieldActionPerformed(evt);
-            }
-        });
+        DateJLable.setText("rendezvous");
 
         BriefingJlabel.setText("Briefing:");
 
@@ -66,6 +69,22 @@ public class OperationAdd extends javax.swing.JFrame {
         jScrollPane2.setViewportView(EquipmentNeededInputField);
 
         AddOperationButton.setText("ADDD");
+        AddOperationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddOperationButtonActionPerformed(evt);
+            }
+        });
+
+        DisplayTextArea.setColumns(20);
+        DisplayTextArea.setRows(5);
+        jScrollPane3.setViewportView(DisplayTextArea);
+
+        returnHome.setText("return home");
+        returnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnHomeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,12 +105,17 @@ public class OperationAdd extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(NameInputTextField)
-                            .addComponent(DateInputTextField)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)))
+                            .addComponent(jScrollPane2)
+                            .addComponent(rendezvousTextField)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(AddOperationButton)))
+                        .addGap(164, 164, 164)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(returnHome)
+                            .addComponent(AddOperationButton))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,29 +127,64 @@ public class OperationAdd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NameJlabel)
                     .addComponent(NameInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DateJLable)
-                    .addComponent(DateInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BriefingJlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EquipmentNeededJLabel)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(DateJLable)
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(rendezvousTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(BriefingJlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(EquipmentNeededJLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34)
                 .addComponent(AddOperationButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(returnHome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DateInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateInputTextFieldActionPerformed
+    private void AddOperationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddOperationButtonActionPerformed
+        try {
+            
+            OperationsManager2 manager = new OperationsManager2();
+            
+           boolean createdOperation = manager.createOperation(3, NameInputTextField, BriefingDisplayInputField, EquipmentNeededInputField, rendezvousTextField);
+           
+           if(createdOperation == false){
+               DisplayTextArea.setText("Am error occured during the proscess");
+           }
+           if(createdOperation == true){
+               DisplayTextArea.setText("Operation created succcesfully");
+               returnHome.setVisible(true);
+               
+           }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OperationAdd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OperationAdd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_AddOperationButtonActionPerformed
+
+    private void returnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnHomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DateInputTextFieldActionPerformed
+    }//GEN-LAST:event_returnHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,11 +212,13 @@ public class OperationAdd extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(OperationAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new OperationAdd().setVisible(true);
+                
             }
         });
     }
@@ -166,8 +227,8 @@ public class OperationAdd extends javax.swing.JFrame {
     private javax.swing.JButton AddOperationButton;
     private javax.swing.JTextArea BriefingDisplayInputField;
     private javax.swing.JLabel BriefingJlabel;
-    private javax.swing.JTextField DateInputTextField;
     private javax.swing.JLabel DateJLable;
+    private javax.swing.JTextArea DisplayTextArea;
     private javax.swing.JTextArea EquipmentNeededInputField;
     private javax.swing.JLabel EquipmentNeededJLabel;
     private javax.swing.JTextField NameInputTextField;
@@ -175,5 +236,8 @@ public class OperationAdd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField rendezvousTextField;
+    private javax.swing.JButton returnHome;
     // End of variables declaration//GEN-END:variables
 }

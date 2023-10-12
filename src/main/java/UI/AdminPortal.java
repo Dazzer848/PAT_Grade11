@@ -4,6 +4,8 @@
  */
 package UI;
 
+import Person.PersonManager2;
+
 /**
  *
  * @author dazzl
@@ -15,6 +17,7 @@ public class AdminPortal extends javax.swing.JFrame {
      */
     public AdminPortal() {
         initComponents();
+        PersonManager2.adminPopulation("Dazzer", userNameDisplay, operationInDiplsay, totalDonatedDisplay);
     }
 
     /**

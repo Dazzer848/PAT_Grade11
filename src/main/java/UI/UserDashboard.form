@@ -145,6 +145,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Chrome spoon"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="operationButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -194,6 +197,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Payment to Org Account"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orgAccountPaymentButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="TradeGoodsSoldButton">
           <Properties>
