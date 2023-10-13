@@ -4,10 +4,10 @@
  */
 package UI;
 
-import Operation.OperationManeger;
-import Operation.Operations;
-import Operation.OperationsManager2;
-import Person.PersonManager2;
+import OldManagers.OLDOperationManeger;
+import OldManagers.OLDoperations;
+import Operation.OperationManager;
+import Person.PersonManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +25,7 @@ public class OperationSummary extends javax.swing.JFrame {
         try {
             initComponents();
             
-            OperationsManager2 manager = new OperationsManager2();
+            OperationManager manager = new OperationManager();
             
             manager.populateOperatiosSummary(UsersWhoPartookDisplayTextArea, PerOperatorPaymentOutput, MarauderSquadCutOutput, TotalTAFOutput, DebriefCommentsTextArea, 1);
         } catch (ClassNotFoundException ex) {
@@ -255,7 +255,7 @@ public class OperationSummary extends javax.swing.JFrame {
     }//GEN-LAST:event_returnHomeActionPerformed
 
     private void PayOperatorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayOperatorsButtonActionPerformed
-        PersonManager2.payPeople(1, Integer.parseInt(PerOperatorPaymentOutput.getText()), Integer.parseInt(MarauderSquadCutOutput.getText()));
+        PersonManager.payPeople(1, Integer.parseInt(PerOperatorPaymentOutput.getText()), Integer.parseInt(MarauderSquadCutOutput.getText()));
     }//GEN-LAST:event_PayOperatorsButtonActionPerformed
 
     /**

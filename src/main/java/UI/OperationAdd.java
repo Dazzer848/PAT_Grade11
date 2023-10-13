@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Operation.OperationsManager2;
+import Operation.OperationManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -161,7 +161,7 @@ public class OperationAdd extends javax.swing.JFrame {
     private void AddOperationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddOperationButtonActionPerformed
         try {
             
-            OperationsManager2 manager = new OperationsManager2();
+            OperationManager manager = new OperationManager();
             
            boolean createdOperation = manager.createOperation(3, NameInputTextField, BriefingDisplayInputField, EquipmentNeededInputField, rendezvousTextField);
            

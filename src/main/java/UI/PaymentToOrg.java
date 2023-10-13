@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Person.PersonManager2;
+import Person.PersonManager;
 
 /**
  *
@@ -97,7 +97,7 @@ public class PaymentToOrg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DonateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DonateButtonActionPerformed
-        boolean paymentStatus = PersonManager2.payMarauderSquad(Integer.parseInt(AmountToDonate.getText()));
+        boolean paymentStatus = PersonManager.payMarauderSquad(Integer.parseInt(AmountToDonate.getText()));
         
         if(paymentStatus == true){
             DonationHeader.setText(" Thank you so much kind citizen!");

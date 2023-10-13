@@ -4,130 +4,84 @@
  */
 package Operation;
 
-import Person.Person;
-import java.time.LocalDateTime;
-
 /**
  *
  * @author dazzl
  */
 public class Operations {
-    private String name;
-    //private LocalDateTime dateOfOperation;
-    private Person[] operators;
-    private int totalMoneyMade;
-    private int TAFpaid;
-    private int paymentPerOperator;
-    private String comments;
-    private String briefing;
     private int ID;
-    private String equipment;
-    private int nuimberOfPeople;
-    // We will work the ID's based off of the size of the array. We will set the ID to size as this is always more than the index of 
+    private String name;
+    private String briefing;
+    private String equipmentNeeded;
+    private String redezvous;
+    private int grossIncome;
+    private String comments;
     
-    public Operations(String name, Person[] operators, int totalMoneyMade, int TAFpaid, int paymentPerOperator, String comments, String briefing, int ID, String equipment,int numberOf) {
-        this.name = name;
-        //this.dateOfOperation = dateOfOperation;
-        this.operators = operators;
-        this.totalMoneyMade = totalMoneyMade;
-        this.TAFpaid = TAFpaid;
-        this.paymentPerOperator = paymentPerOperator;
-        this.comments = comments;
-        this.briefing = briefing;
-        this.ID = ID;
-        this.equipment = equipment;
-        this.nuimberOfPeople = numberOf;
-    }
-
-    public int getTAFpaid() {
-        return TAFpaid;
+    
+    public Operations(int inID, String inName, String inBriefing, String inequipmentNeeded, String inRedezvous, int inGrossIncome, String inComments){
+        this.ID = inID;
+        this.name = inName;
+        this.briefing = inBriefing;
+        this.equipmentNeeded = inequipmentNeeded;
+        this.redezvous = inRedezvous;
+        this.grossIncome = inGrossIncome;
+        this.comments = inComments;
     }
 
     public int getID() {
         return ID;
     }
 
-    public void setTAFpaid() {
-        this.TAFpaid = (int) (totalMoneyMade * 0.005);
-        //Update DBMS
+    public String getName() {
+        return name;
+    }
+
+    public String getBriefing() {
+        return briefing;
+    }
+
+    public String getEquipmentNeeded() {
+        return equipmentNeeded;
+    }
+
+    public String getRedezvous() {
+        return redezvous;
+    }
+
+    public int getGrossIncome() {
+        return grossIncome;
+    }
+
+    public String getComments() {
+        return comments;
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    //public LocalDateTime getDateOfOperation() {     
-        //return dateOfOperation;
-    //}
-
-    //This cant be a static method but it needs to be why?
-    public Person[] getOperators() {
-        return operators;
-    }
-
-    public int getTotalMoneyMade() {
-        return totalMoneyMade;
-    }
-
-    public int getPaymentPerOperator() {
-        return paymentPerOperator;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-    
-    // This needs to be a static method but it cant be. Why?
-    public String getBriefing() {
-        return briefing;
-    }
-    
-    
     public void setName(String name) {
         this.name = name;
-    }
-    
-    
-    // This cant be a static method but it needs to be! How fix
-    public String getEquipment(){
-        return equipment;
-    }
-
-    public void setDateOfOperation(LocalDateTime dateOfOperation) {
-//        this.dateOfOperation = dateOfOperation;
-    }
-
-    public void setOperators(Person[] operators) {
-        this.operators = operators;
-    }
-
-    public void setTotalMoneyMade(int totalMoneyMade) {
-        this.totalMoneyMade = totalMoneyMade;
-    }
-
-    public void setPaymentPerOperator(int paymentPerOperator) {
-        this.paymentPerOperator = (int) paymentPerOperator;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
     }
 
     public void setBriefing(String briefing) {
         this.briefing = briefing;
     }
-    
-    public String toStringUsers(){
-        
-        String toDisplay = "";
-        for(int i = 1; i < operators.length; i++){
-            toDisplay += operators[i].getUsername() + "\n";
-        }
-        return toDisplay;
+
+    public void setEquipmentNeeded(String equipmentNeeded) {
+        this.equipmentNeeded = equipmentNeeded;
+    }
+
+    public void setRedezvous(String redezvous) {
+        this.redezvous = redezvous;
+    }
+
+    public void setGrossIncome(int grossIncome) {
+        this.grossIncome = grossIncome;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
     
 }

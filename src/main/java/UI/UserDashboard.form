@@ -73,13 +73,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="operationButton1" pref="177" max="32767" attributes="0"/>
-                      <Component id="operationButton2" alignment="1" max="32767" attributes="0"/>
-                      <Component id="operationButton7" alignment="1" max="32767" attributes="0"/>
-                      <Component id="operationButton6" alignment="1" max="32767" attributes="0"/>
-                      <Component id="operationButton5" alignment="1" max="32767" attributes="0"/>
-                      <Component id="operationButton3" alignment="1" max="32767" attributes="0"/>
-                      <Component id="operationButton4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="JButton1" pref="177" max="32767" attributes="0"/>
+                      <Component id="JButton2" alignment="1" max="32767" attributes="0"/>
+                      <Component id="JButton6" alignment="1" max="32767" attributes="0"/>
+                      <Component id="JButton5" alignment="1" max="32767" attributes="0"/>
+                      <Component id="JButton3" alignment="1" max="32767" attributes="0"/>
+                      <Component id="JButton4" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
@@ -89,64 +88,69 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="operationButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="JButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="operationButton2" min="-2" max="-2" attributes="0"/>
+                  <Component id="JButton2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="operationButton3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JButton3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="operationButton4" min="-2" max="-2" attributes="0"/>
+                  <Component id="JButton4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="operationButton5" min="-2" max="-2" attributes="0"/>
+                  <Component id="JButton5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="operationButton6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="operationButton7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                  <Component id="JButton6" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="152" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="operationButton3">
+        <Component class="javax.swing.JButton" name="JButton3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Simple salvage"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButton3ActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="operationButton4">
+        <Component class="javax.swing.JButton" name="JButton4">
           <Properties>
             <Property name="text" type="java.lang.String" value="My oh my!?!"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButton4ActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="operationButton5">
+        <Component class="javax.swing.JButton" name="JButton5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Hunting Holidays"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButton5ActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="operationButton6">
+        <Component class="javax.swing.JButton" name="JButton6">
           <Properties>
             <Property name="text" type="java.lang.String" value="Great Gatsby&apos;s house?"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="operationButton6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButton6ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="operationButton7">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="The end!"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="operationButton2">
+        <Component class="javax.swing.JButton" name="JButton2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Breaker yard blockade"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButton2ActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="operationButton1">
+        <Component class="javax.swing.JButton" name="JButton1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Chrome spoon"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="operationButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButton1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -169,6 +173,7 @@
                       <Component id="SubdryAccountButton" max="32767" attributes="0"/>
                       <Component id="ORGdonationButton" pref="212" max="32767" attributes="0"/>
                       <Component id="PaymentToAccountantButton" max="32767" attributes="0"/>
+                      <Component id="adminManageButton" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -187,7 +192,9 @@
                   <Component id="ORGdonationButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="PaymentToAccountantButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="103" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="adminManageButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -220,6 +227,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Payment to Accountant"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="adminManageButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Manage Users"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminManageButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

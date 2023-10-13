@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Person.PersonManager2;
+import Person.PersonManager;
 
 /**
  *
@@ -17,7 +17,7 @@ public class AdminPortal extends javax.swing.JFrame {
      */
     public AdminPortal() {
         initComponents();
-        PersonManager2.adminPopulation("Dazzer", userNameDisplay, operationInDiplsay, totalDonatedDisplay);
+        PersonManager.adminPopulation("Dazzer", userNameDisplay, operationInDiplsay, totalDonatedDisplay);
     }
 
     /**
@@ -55,6 +55,11 @@ public class AdminPortal extends javax.swing.JFrame {
         HeaderLabel.setText("USER MANAHMENT");
 
         UserComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        UserComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserComboBoxActionPerformed(evt);
+            }
+        });
 
         SelectUserLabel.setBackground(new java.awt.Color(0, 0, 0));
         SelectUserLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -153,14 +158,10 @@ public class AdminPortal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(293, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +179,10 @@ public class AdminPortal extends javax.swing.JFrame {
     private void DeleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteUserButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DeleteUserButtonActionPerformed
+
+    private void UserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserComboBoxActionPerformed
 
     /**
      * @param args the command line arguments

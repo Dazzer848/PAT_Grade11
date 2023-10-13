@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Operation;
+package OldManagers;
 
+import OldManagers.OLDoperations;
 import DBMS.DB;
 import java.time.LocalDateTime;
 import Person.Person;
-import Person.Person2;
 import Person.PersonManager;
-import Person.PersonManager2;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,15 +20,15 @@ import java.util.logging.Logger;
  *
  * @author dazzl
  */
-public class OperationManeger {
+public class OLDOperationManeger {
     int size;
-    Operations[] operationsArray;
+    OLDoperations[] operationsArray;
     int sizeOfPeopleArray = 0;
-    //PersonManager manaeger = new PersonManager();
+    //PersonManager manaeger = new OLDpersonManager();
 
-    public OperationManeger() throws ClassNotFoundException, SQLException {
-        operationsArray = new Operations[100];
-        Person[] usersWhoPatook = new Person[100];
+    public OLDOperationManeger() throws ClassNotFoundException, SQLException {
+        operationsArray = new OLDoperations[100];
+        OLDperson[] usersWhoPatook = new OLDperson[100];
         
         DB.connect();
         ResultSet table = DB.query("SELECT * FROM darrenlDB.operations");
@@ -56,11 +55,11 @@ public class OperationManeger {
             String listOfUsers = table.getString(6);
             
             Scanner lineSC = new Scanner(listOfUsers).useDelimiter(",");
-            PersonManager manaeger = new PersonManager();
+            OLDpersonManager manaeger = new OLDpersonManager();
             
             while(lineSC.hasNext()){
                 int IDofUser = lineSC.nextInt();
-                Person userWhoPartook = manaeger.searchForPersonUsingID(IDofUser);
+                OLDperson userWhoPartook = manaeger.searchForPersonUsingID(IDofUser);
                 usersWhoPatook[sizeOfPeopleArray] = userWhoPartook;
                 sizeOfPeopleArray++;
             }
@@ -75,7 +74,7 @@ public class OperationManeger {
             //NEED TO ERROR CHECK THIS! 
             //Also fix up the ordering of things in the database it looks terrible!
             //Lastly ensure to add a comments column!
-            Operations o = new Operations(nameOfOperation, usersWhoPatook, totalMade, TAFpaid, paymentPerOperator, comments, briefing, ID, equipment, numberOf);
+            OLDoperations o = new OLDoperations(nameOfOperation, usersWhoPatook, totalMade, TAFpaid, paymentPerOperator, comments, briefing, ID, equipment, numberOf);
             operationsArray[size] = o;
             size++;
                         
@@ -85,7 +84,7 @@ public class OperationManeger {
     
     
     
-    public Operations searchForOperation(String operationNameToLookFor){
+    public OLDoperations searchForOperation(String operationNameToLookFor){
        
         //Loops trough the array of operations to see if it can find the Name field of an operation that equals the one they want to find
         for(int i = 0; i < size; i++){
@@ -98,7 +97,7 @@ public class OperationManeger {
         return null;
     }
     
-    public Operations searchForOperationViaIDD(int ID){
+    public OLDoperations searchForOperationViaIDD(int ID){
                 //Loops trough the array of operations to see if it can find the Name field of an operation that equals the one they want to find
         for(int i = 0; i < size; i++){
             if(operationsArray[i].getID() == ID){
@@ -109,11 +108,11 @@ public class OperationManeger {
         return null;
     }
     
-    // This creates an entirely new Operations
+    // This creates an entirely new OLDoperations
     // Note how some field are missing this is due to the fact that we dont need to populate them as of yet
     //Ask Mr B for help with this fact
-    public void createNewOperation(String inName, LocalDateTime inDate, Person[] operatorsIn, String inBriefing){
-        Operations o = new Operations(inName,operatorsIn,-1,-1,-1,"",inBriefing, 0, "wow", 4);
+    public void createNewOperation(String inName, LocalDateTime inDate, OLDperson[] operatorsIn, String inBriefing){
+        OLDoperations o = new OLDoperations(inName,operatorsIn,-1,-1,-1,"",inBriefing, 0, "wow", 4);
         
         operationsArray[size] = o;
         size++;
@@ -147,9 +146,9 @@ public class OperationManeger {
         System.out.println("The operation couldnt be found");
     }
     
-       public void updateOperators(int IDofOperationToUpdate, Person userToAdd){
-          Operations op = searchForOperationViaIDD(IDofOperationToUpdate);
-          Person[] listOfUser = op.getOperators();
+       public void updateOperators(int IDofOperationToUpdate, OLDperson userToAdd){
+          OLDoperations op = searchForOperationViaIDD(IDofOperationToUpdate);
+          OLDperson[] listOfUser = op.getOperators();
           
           //Need to get the size
           //listOfUser[]          
@@ -170,7 +169,7 @@ public class OperationManeger {
                for(int i = 0; i <= size; i++){
                    if(operationsArray[i].getName().equals(nameOfOperation)){
                        int totalMoneyMade = operationsArray[i].getTotalMoneyMade();
-                       Person[] operatiors = operationsArray[i].getOperators();
+                       OLDperson[] operatiors = operationsArray[i].getOperators();
                        //Get the size of the operatior
                        
                        //THIS IS DEBUGGING AND NEEDS TO BE CHANGED

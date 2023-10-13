@@ -4,8 +4,9 @@
  */
 package UI;
 
+import Person.AppManager;
+import OldManagers.OLDpersonManager;
 import Person.PersonManager;
-import Person.PersonManager2;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class LogIN extends javax.swing.JFrame {
      */
     public LogIN() {
         initComponents();
+        AppManager.init();
     }
 
     /**
@@ -132,11 +134,10 @@ public class LogIN extends javax.swing.JFrame {
     }//GEN-LAST:event_EnlistButtonActionPerformed
 
     private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
-        boolean canLogIn = PersonManager2.canLogIn(usernameTextField, passwordTextField);
-        if(canLogIn = true){
+        boolean canLogIn = PersonManager.canLogIn(usernameTextField, passwordTextField);
+        if(canLogIn == true){
             dispose();
-            PersonManager2 manager = new PersonManager2();
-            manager.setCurrentUser(usernameTextField.getText());
+            AppManager.pm.setCurrentUser(usernameTextField.getText());
             new UserDashboard().setVisible(true);
         }
         else{

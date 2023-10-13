@@ -4,9 +4,7 @@
  */
 package Person;
 
-import DBMS.DB;
-import Operation.Operations;
-import java.sql.ResultSet;
+import OldManagers.OLDoperations;
 import java.sql.SQLException;
 
 /**
@@ -14,65 +12,31 @@ import java.sql.SQLException;
  * @author dazzl
  */
 public class Person {
-    private String username;
-    private Operations[] OperationsIn;
-    private int ID;
-    private int totalMoneyEarned;
-    private String password;
-    private int sizeOfOperationsIN = 0;
-
-    public Person(String inUsername, Operations[] OperationsIN, int inTotalMoney, String inPassword, int inID) throws ClassNotFoundException, SQLException{
-        this.username = inUsername;
-        this.ID = inID;
-        //Want to make an Operations array
-        this.OperationsIn = new Operations[100];
-        this.totalMoneyEarned = inTotalMoney;
-        this.password = inPassword;
+        private int ID;
+        private String username;
+        private String password;
+        private int totalMade;
+        public Person(int IDin, String usernameIn, String passwordIN, int totalMadeIN) throws ClassNotFoundException, SQLException{
+            this.ID = IDin;
+            this.username = usernameIn;
+            this.password = passwordIN;
+            this.totalMade = totalMadeIN;
         }
-    
-    public String getUsername(){
-        return this.username;
+
+    public int getID() {
+        return ID;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void updateOperationsIn(Operations newOperationToAdd) {
-        // Ensure you add this array to a DBMS side which will add in the operations ID to the DBMS
-        OperationsIn[sizeOfOperationsIN] = newOperationToAdd;
-        
-        //Ensure you send this new list to the DBMS
-        
-    }
-
-    public void setTotalMoneyEarned(int totalMoneyEarned) {
-        this.totalMoneyEarned = totalMoneyEarned;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Operations[] getOperationsIn() {
-        return OperationsIn;
-    }
-
-    public double getTotalMoneyEarned() {
-        return totalMoneyEarned;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
         return password;
     }
-   public void updateTotralMoneyEarned(double inputAmount) throws ClassNotFoundException, SQLException{
-       PersonManager p = new PersonManager();
-       totalMoneyEarned += inputAmount;
-       p.updateTotalMoneyEarned(username, totalMoneyEarned);
-   }
-   
-   public int getID(){
-       return ID;
-   }
-    }
 
+    public int getTotalMade() {
+        return totalMade;
+    }
+    
+}

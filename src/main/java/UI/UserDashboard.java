@@ -4,9 +4,10 @@
  */
 package UI;
 
-import Operation.OperationsManager2;
-import Person.Person2;
-import Person.PersonManager2;
+import Operation.OperationManager;
+import Person.AppManager;
+import Person.Person;
+import Person.PersonManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +24,20 @@ public class UserDashboard extends javax.swing.JFrame {
     public UserDashboard() {
         try {
             initComponents();
+            AppManager.init();
             
-            PersonManager2 manager = new PersonManager2();
-            Person2 currentUser = manager.getCurrentUser();
-            String username = currentUser.getUsername();
+            adminManageButton.setVisible(false);
             
-            headerLabel.setText("-------------------------------------- Welcome " + username + "---------------------------------");
+            Person currentUser = AppManager.pm.getCurrentUser();
+            headerLabel.setText("-------------------------------------- Welcome " + currentUser.getUsername() + "---------------------------------");
+            
+            if(currentUser.getUsername().equals("MarauderSquadron")){
+                adminManageButton.setVisible(true);
+            }
+            
+            OperationManager manager = new OperationManager();
+            manager.populateOperationsButtons(JButton1, JButton2, JButton3, JButton4, JButton5, JButton6);
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -47,19 +56,19 @@ public class UserDashboard extends javax.swing.JFrame {
 
         headerLabel = new javax.swing.JLabel();
         OperationsPanel = new javax.swing.JPanel();
-        operationButton3 = new javax.swing.JButton();
-        operationButton4 = new javax.swing.JButton();
-        operationButton5 = new javax.swing.JButton();
-        operationButton6 = new javax.swing.JButton();
-        operationButton7 = new javax.swing.JButton();
-        operationButton2 = new javax.swing.JButton();
-        operationButton1 = new javax.swing.JButton();
+        JButton3 = new javax.swing.JButton();
+        JButton4 = new javax.swing.JButton();
+        JButton5 = new javax.swing.JButton();
+        JButton6 = new javax.swing.JButton();
+        JButton2 = new javax.swing.JButton();
+        JButton1 = new javax.swing.JButton();
         PaymentsPanel = new javax.swing.JPanel();
         orgAccountPaymentButton = new javax.swing.JButton();
         TradeGoodsSoldButton = new javax.swing.JButton();
         SubdryAccountButton = new javax.swing.JButton();
         ORGdonationButton = new javax.swing.JButton();
         PaymentToAccountantButton = new javax.swing.JButton();
+        adminManageButton = new javax.swing.JButton();
         PaymentCalculatorPanel = new javax.swing.JPanel();
         PaymentCalculatorHeaderLabel = new javax.swing.JLabel();
         TotalInLabel = new javax.swing.JLabel();
@@ -83,27 +92,45 @@ public class UserDashboard extends javax.swing.JFrame {
 
         OperationsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        operationButton3.setText("Simple salvage");
-
-        operationButton4.setText("My oh my!?!");
-
-        operationButton5.setText("Hunting Holidays");
-
-        operationButton6.setText("Great Gatsby's house?");
-        operationButton6.addActionListener(new java.awt.event.ActionListener() {
+        JButton3.setText("Simple salvage");
+        JButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                operationButton6ActionPerformed(evt);
+                JButton3ActionPerformed(evt);
             }
         });
 
-        operationButton7.setText("The end!");
-
-        operationButton2.setText("Breaker yard blockade");
-
-        operationButton1.setText("Chrome spoon");
-        operationButton1.addActionListener(new java.awt.event.ActionListener() {
+        JButton4.setText("My oh my!?!");
+        JButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                operationButton1ActionPerformed(evt);
+                JButton4ActionPerformed(evt);
+            }
+        });
+
+        JButton5.setText("Hunting Holidays");
+        JButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton5ActionPerformed(evt);
+            }
+        });
+
+        JButton6.setText("Great Gatsby's house?");
+        JButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton6ActionPerformed(evt);
+            }
+        });
+
+        JButton2.setText("Breaker yard blockade");
+        JButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton2ActionPerformed(evt);
+            }
+        });
+
+        JButton1.setText("Chrome spoon");
+        JButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton1ActionPerformed(evt);
             }
         });
 
@@ -114,33 +141,30 @@ public class UserDashboard extends javax.swing.JFrame {
             .addGroup(OperationsPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(OperationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(operationButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                    .addComponent(operationButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(operationButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(operationButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(operationButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(operationButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(operationButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(JButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                    .addComponent(JButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(54, 54, 54))
         );
         OperationsPanelLayout.setVerticalGroup(
             OperationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OperationsPanelLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(operationButton1)
+                .addComponent(JButton1)
                 .addGap(18, 18, 18)
-                .addComponent(operationButton2)
+                .addComponent(JButton2)
                 .addGap(30, 30, 30)
-                .addComponent(operationButton3)
+                .addComponent(JButton3)
                 .addGap(35, 35, 35)
-                .addComponent(operationButton4)
+                .addComponent(JButton4)
                 .addGap(36, 36, 36)
-                .addComponent(operationButton5)
+                .addComponent(JButton5)
                 .addGap(43, 43, 43)
-                .addComponent(operationButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(operationButton7)
-                .addGap(47, 47, 47))
+                .addComponent(JButton6)
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         PaymentsPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -160,6 +184,13 @@ public class UserDashboard extends javax.swing.JFrame {
 
         PaymentToAccountantButton.setText("Payment to Accountant");
 
+        adminManageButton.setText("Manage Users");
+        adminManageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminManageButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PaymentsPanelLayout = new javax.swing.GroupLayout(PaymentsPanel);
         PaymentsPanel.setLayout(PaymentsPanelLayout);
         PaymentsPanelLayout.setHorizontalGroup(
@@ -171,7 +202,8 @@ public class UserDashboard extends javax.swing.JFrame {
                     .addComponent(TradeGoodsSoldButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SubdryAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ORGdonationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(PaymentToAccountantButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PaymentToAccountantButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adminManageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PaymentsPanelLayout.setVerticalGroup(
@@ -187,7 +219,9 @@ public class UserDashboard extends javax.swing.JFrame {
                 .addComponent(ORGdonationButton)
                 .addGap(42, 42, 42)
                 .addComponent(PaymentToAccountantButton)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(adminManageButton)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         PaymentCalculatorPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -340,21 +374,51 @@ public class UserDashboard extends javax.swing.JFrame {
         calculator(Integer.parseInt(TotalInTextField.getText()), Integer.parseInt(NumberOfUsersIntextField.getText()), Integer.parseInt(MarauderSquadInTextField.getText()));
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
-    private void operationButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operationButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_operationButton6ActionPerformed
+    private void JButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton6ActionPerformed
+        int ID = 6;
+        new Operation().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_JButton6ActionPerformed
 
-    private void operationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operationButton1ActionPerformed
+    private void JButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton1ActionPerformed
         int ID = 1;
         new Operation().setVisible(true);
-        // HOW CAN I REFERENCE CODE HERE
-        //manager.populateOperationsUI(OutlinesAndGoalsForOperationTextArea, DateTimeAndUsersTextArea, EquipmentNeededTextArea, OperationHeader, ID);
         dispose();
-    }//GEN-LAST:event_operationButton1ActionPerformed
+    }//GEN-LAST:event_JButton1ActionPerformed
 
     private void orgAccountPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orgAccountPaymentButtonActionPerformed
-        // TODO add your handling code here:
+        new PaymentToOrg().setVisible(true);
+        dispose();
     }//GEN-LAST:event_orgAccountPaymentButtonActionPerformed
+
+    private void adminManageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminManageButtonActionPerformed
+        new AdminPortal().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_adminManageButtonActionPerformed
+
+    private void JButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton3ActionPerformed
+        int ID = 3;
+        new Operation().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_JButton3ActionPerformed
+
+    private void JButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton2ActionPerformed
+        int ID = 2;
+        new Operation().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_JButton2ActionPerformed
+
+    private void JButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton4ActionPerformed
+        int ID = 4;
+        new Operation().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_JButton4ActionPerformed
+
+    private void JButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton5ActionPerformed
+         int ID = 5;
+        new Operation().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_JButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,6 +473,12 @@ public class UserDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CalculateButton;
     private javax.swing.JLabel DividerLabel;
+    private javax.swing.JButton JButton1;
+    private javax.swing.JButton JButton2;
+    private javax.swing.JButton JButton3;
+    private javax.swing.JButton JButton4;
+    private javax.swing.JButton JButton5;
+    private javax.swing.JButton JButton6;
     private javax.swing.JTextField MarauderSquadInTextField;
     private javax.swing.JLabel MarauderSquadronLabel;
     private javax.swing.JTextField NumberOfUsersIntextField;
@@ -429,14 +499,8 @@ public class UserDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel TotalProfitsLabel;
     private javax.swing.JTextField TotalProfitsOutTextField;
     private javax.swing.JButton TradeGoodsSoldButton;
+    private javax.swing.JButton adminManageButton;
     private javax.swing.JLabel headerLabel;
-    private javax.swing.JButton operationButton1;
-    private javax.swing.JButton operationButton2;
-    private javax.swing.JButton operationButton3;
-    private javax.swing.JButton operationButton4;
-    private javax.swing.JButton operationButton5;
-    private javax.swing.JButton operationButton6;
-    private javax.swing.JButton operationButton7;
     private javax.swing.JButton orgAccountPaymentButton;
     // End of variables declaration//GEN-END:variables
 }

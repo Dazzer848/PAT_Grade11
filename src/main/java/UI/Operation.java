@@ -4,12 +4,13 @@
  */
 package UI;
 
-import Operation.OperationManeger;
+import OldManagers.OLDOperationManeger;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Operation.Operations;
-import Operation.OperationsManager2;
+import OldManagers.OLDoperations;
+import Operation.OperationManager;
+import Person.AppManager;
 /**
  *
  * @author dazzl
@@ -17,14 +18,18 @@ import Operation.OperationsManager2;
 public class Operation extends javax.swing.JFrame {
 
     /**
-     * Creates new form Operations
+     * Creates new form OLDoperations
      */
     public Operation() {
         initComponents();   
-        OperationsManager2 manager;
+        OperationManager manager;
+        AppManager.init();
+        ReturnHomeButton.setVisible(false);
+        
         try {
-            manager = new OperationsManager2();
+            manager = new OperationManager();
             manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader, 1);
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -52,6 +57,7 @@ public class Operation extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         EquipmentDisplay = new javax.swing.JTextArea();
         ResgisterButton = new javax.swing.JButton();
+        ReturnHomeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +141,13 @@ public class Operation extends javax.swing.JFrame {
             }
         });
 
+        ReturnHomeButton.setText("Return Home");
+        ReturnHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnHomeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,14 +155,17 @@ public class Operation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ResgisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OperationHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addComponent(ReturnHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ResgisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(OperationHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,9 +178,11 @@ public class Operation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(ResgisterButton)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ReturnHomeButton)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,10 +190,12 @@ public class Operation extends javax.swing.JFrame {
 
     private void ResgisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResgisterButtonActionPerformed
         try {
-            OperationsManager2 manager = new OperationsManager2();
+            OperationManager manager = new OperationManager();
             
-            manager.registerForOp(1);
+            manager.registerForOp(1,ResgisterButton);
             manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader, 1);
+            
+            ReturnHomeButton.setVisible(true);
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
@@ -184,6 +204,11 @@ public class Operation extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_ResgisterButtonActionPerformed
+
+    private void ReturnHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnHomeButtonActionPerformed
+        dispose();
+        new UserDashboard().setVisible(true);
+    }//GEN-LAST:event_ReturnHomeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,14 +227,16 @@ public class Operation extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OLDoperations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OLDoperations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OLDoperations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Operations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OLDoperations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -227,6 +254,7 @@ public class Operation extends javax.swing.JFrame {
     private javax.swing.JTextArea EquipmentDisplay;
     private javax.swing.JLabel OperationHeader;
     private javax.swing.JButton ResgisterButton;
+    private javax.swing.JButton ReturnHomeButton;
     private javax.swing.JTextArea UsersDisplay;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
