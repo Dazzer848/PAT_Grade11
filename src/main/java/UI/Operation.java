@@ -10,25 +10,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import OldManagers.OLDoperations;
 import Operation.OperationManager;
+import Operation.Operations;
 import Person.AppManager;
 /**
  *
  * @author dazzl
  */
 public class Operation extends javax.swing.JFrame {
-
+    private Operations operation = null;
     /**
      * Creates new form OLDoperations
      */
-    public Operation() {
+    public Operation(String INoperationName) {
         initComponents();   
+        setLocationRelativeTo(null);
+        
+        
+        //Initializes all the required managers
         OperationManager manager;
         AppManager.init();
         ReturnHomeButton.setVisible(false);
         
         try {
+            
+            //Creates the new Operation Manager
             manager = new OperationManager();
-            manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader, 1);
+            operation = manager.searchForOperationsUsingName(INoperationName);
+            
+            //Populates the Operation UI
+            manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader, operation.getID());
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Operation.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,8 +202,11 @@ public class Operation extends javax.swing.JFrame {
         try {
             OperationManager manager = new OperationManager();
             
-            manager.registerForOp(1,ResgisterButton);
-            manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader, 1);
+            //Uses the registr for operations method
+            manager.registerForOp(operation.getID(),ResgisterButton);
+            
+            //RE-POPULATES THE ui screen with the correct dara
+            manager.populateOperationsUI(BriefingDisplay, UsersDisplay, EquipmentDisplay, OperationHeader,operation.getID());
             
             ReturnHomeButton.setVisible(true);
             
@@ -243,11 +256,12 @@ public class Operation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Operation().setVisible(true);
-                // I want this screen to be populated by the OperationManager2.populateUI class.
+                
+                new Operation("").setVisible(true);
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea BriefingDisplay;

@@ -17,6 +17,8 @@ public class AdminPortal extends javax.swing.JFrame {
      */
     public AdminPortal() {
         initComponents();
+        setLocationRelativeTo(null);
+        //Calls upon adminPopulation method ( see PersonManager )
         PersonManager.adminPopulation("Dazzer", userNameDisplay, operationInDiplsay, totalDonatedDisplay);
     }
 
@@ -29,10 +31,10 @@ public class AdminPortal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         HeaderLabel = new javax.swing.JLabel();
-        UserComboBox = new javax.swing.JComboBox<>();
         SelectUserLabel = new javax.swing.JLabel();
         userNameDisplay = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
@@ -44,6 +46,11 @@ public class AdminPortal extends javax.swing.JFrame {
         DangerZoneHeading = new javax.swing.JLabel();
         UpdateUserButton = new javax.swing.JButton();
         DeleteUserButton = new javax.swing.JButton();
+        userNameToLookFor = new javax.swing.JTextField();
+        FindUserButton = new javax.swing.JButton();
+        ReturnHomeButton = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,13 +60,6 @@ public class AdminPortal extends javax.swing.JFrame {
 
         HeaderLabel.setForeground(new java.awt.Color(0, 0, 0));
         HeaderLabel.setText("USER MANAHMENT");
-
-        UserComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        UserComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserComboBoxActionPerformed(evt);
-            }
-        });
 
         SelectUserLabel.setBackground(new java.awt.Color(0, 0, 0));
         SelectUserLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -81,6 +81,11 @@ public class AdminPortal extends javax.swing.JFrame {
         DangerZoneHeading.setText("------------------- THE DANGER ZONE! ---------------------");
 
         UpdateUserButton.setText("UPDATE USER!");
+        UpdateUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateUserButtonActionPerformed(evt);
+            }
+        });
 
         DeleteUserButton.setText("DELETE USER!");
         DeleteUserButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,16 +94,22 @@ public class AdminPortal extends javax.swing.JFrame {
             }
         });
 
+        FindUserButton.setText("Find User!");
+        FindUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FindUserButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DangerZoneHeading, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                    .addComponent(TheirFieldsHeader, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TheirFieldsHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(TotalDonatedLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                             .addComponent(SelectUserLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -106,33 +117,44 @@ public class AdminPortal extends javax.swing.JFrame {
                             .addComponent(OpertionInLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(userNameDisplay)
                             .addComponent(operationInDiplsay)
                             .addComponent(totalDonatedDisplay)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(UpdateUserButton)
-                                    .addComponent(HeaderLabel))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                    .addComponent(userNameToLookFor)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(HeaderLabel)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(UpdateUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DangerZoneHeading, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(FindUserButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(21, 21, 21)
                 .addComponent(DeleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SelectUserLabel)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(SelectUserLabel)
+                        .addComponent(userNameToLookFor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(HeaderLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(UserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
+                        .addGap(40, 40, 40)))
+                .addGap(15, 15, 15)
+                .addComponent(FindUserButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TheirFieldsHeader)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userNameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(usernameLabel))
@@ -144,24 +166,33 @@ public class AdminPortal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TotalDonatedLabel)
                     .addComponent(totalDonatedDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(UpdateUserButton)
-                .addGap(18, 18, 18)
-                .addComponent(DangerZoneHeading)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DangerZoneHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(DeleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 31, Short.MAX_VALUE))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
+
+        ReturnHomeButton.setText("Return Home");
+        ReturnHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnHomeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ReturnHomeButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,19 +201,35 @@ public class AdminPortal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ReturnHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void DeleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteUserButtonActionPerformed
-        // TODO add your handling code here:
+        PersonManager p = new PersonManager();
+        p.deleteUser(userNameToLookFor.getText());
     }//GEN-LAST:event_DeleteUserButtonActionPerformed
 
-    private void UserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserComboBoxActionPerformed
+    private void UpdateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserButtonActionPerformed
+        
+        //Calls upon the adminUpdateUser ( see PersonManager )
+        PersonManager.adminUpdateUser(userNameDisplay, operationInDiplsay, totalDonatedDisplay,userNameToLookFor.getText());
+    }//GEN-LAST:event_UpdateUserButtonActionPerformed
+
+    private void FindUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindUserButtonActionPerformed
+        String userToLookFor = userNameToLookFor.getText();
+        
+        PersonManager.adminPopulation(userToLookFor, userNameDisplay, operationInDiplsay, totalDonatedDisplay);
+    }//GEN-LAST:event_FindUserButtonActionPerformed
+
+    private void ReturnHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnHomeButtonActionPerformed
+        new UserDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ReturnHomeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,18 +269,21 @@ public class AdminPortal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DangerZoneHeading;
     private javax.swing.JButton DeleteUserButton;
+    private javax.swing.JButton FindUserButton;
     private javax.swing.JLabel HeaderLabel;
     private javax.swing.JLabel OpertionInLabel;
+    private javax.swing.JButton ReturnHomeButton;
     private javax.swing.JLabel SelectUserLabel;
     private javax.swing.JLabel TheirFieldsHeader;
     private javax.swing.JLabel TotalDonatedLabel;
     private javax.swing.JButton UpdateUserButton;
-    private javax.swing.JComboBox<String> UserComboBox;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField operationInDiplsay;
     private javax.swing.JTextField totalDonatedDisplay;
     private javax.swing.JTextField userNameDisplay;
+    private javax.swing.JTextField userNameToLookFor;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

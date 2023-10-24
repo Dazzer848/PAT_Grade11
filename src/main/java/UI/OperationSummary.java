@@ -8,7 +8,10 @@ import OldManagers.OLDOperationManeger;
 import OldManagers.OLDoperations;
 import Operation.OperationManager;
 import Person.PersonManager;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,13 +24,21 @@ public class OperationSummary extends javax.swing.JFrame {
     /**
      * Creates new form OperationSummary
      */
-    public OperationSummary() {
+    public OperationSummary() throws FileNotFoundException {
         try {
+            
             initComponents();
             
+            setLocationRelativeTo(null);
+            
+            //Creates the manager class
             OperationManager manager = new OperationManager();
             
-            manager.populateOperatiosSummary(UsersWhoPartookDisplayTextArea, PerOperatorPaymentOutput, MarauderSquadCutOutput, TotalTAFOutput, DebriefCommentsTextArea, 1);
+            //Scans through the File and adds the operation ID of what the User is currently  looking for
+            Scanner fileSC = new Scanner(new File("SummaryOfOperation.txt"));
+            int ID = fileSC.nextInt();
+            
+            manager.populateOperatiosSummary(UsersWhoPartookDisplayTextArea, PerOperatorPaymentOutput, MarauderSquadCutOutput, TotalTAFOutput, DebriefCommentsTextArea, ID);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -133,10 +144,10 @@ public class OperationSummary extends javax.swing.JFrame {
                             .addComponent(MarauderSquadCutOutput)
                             .addComponent(TotalTAFOutput)))
                     .addComponent(PayOperatorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(returnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PaymentsPanelLayout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 9, Short.MAX_VALUE))
-                    .addComponent(returnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PaymentsPanelLayout.setVerticalGroup(
@@ -160,7 +171,7 @@ public class OperationSummary extends javax.swing.JFrame {
                 .addComponent(PayOperatorsButton)
                 .addGap(18, 18, 18)
                 .addComponent(returnHome)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         PaymentHeaderLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -242,7 +253,7 @@ public class OperationSummary extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(UsersWhoPartookTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,7 +266,20 @@ public class OperationSummary extends javax.swing.JFrame {
     }//GEN-LAST:event_returnHomeActionPerformed
 
     private void PayOperatorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayOperatorsButtonActionPerformed
-        PersonManager.payPeople(1, Integer.parseInt(PerOperatorPaymentOutput.getText()), Integer.parseInt(MarauderSquadCutOutput.getText()));
+        
+        try {
+            
+            //Creates the file scanner
+            Scanner fileSC = new Scanner(new File("SummaryOfOperation.txt"));
+            
+            //Gets te ID which is scanned from the file
+            int ID = fileSC.nextInt();
+            
+            //Uses the payPeople method
+            PersonManager.payPeople(ID, Integer.parseInt(PerOperatorPaymentOutput.getText()), Integer.parseInt(MarauderSquadCutOutput.getText()));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_PayOperatorsButtonActionPerformed
 
     /**
@@ -288,7 +312,11 @@ public class OperationSummary extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OperationSummary().setVisible(true);
+                try {
+                    new OperationSummary().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(OperationSummary.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

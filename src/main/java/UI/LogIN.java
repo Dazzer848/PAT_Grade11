@@ -22,6 +22,9 @@ public class LogIN extends javax.swing.JFrame {
      */
     public LogIN() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        //Initializes the App Manager class
         AppManager.init();
     }
 
@@ -134,9 +137,15 @@ public class LogIN extends javax.swing.JFrame {
     }//GEN-LAST:event_EnlistButtonActionPerformed
 
     private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
+        
+        //Gets the boolean returned by the PersonManager.canLogIn method ( See PersonManager )
         boolean canLogIn = PersonManager.canLogIn(usernameTextField, passwordTextField);
+        
+        //Checks to see if the boolean is true and the User can logIn
         if(canLogIn == true){
             dispose();
+            
+            //Sets the current user.
             AppManager.pm.setCurrentUser(usernameTextField.getText());
             new UserDashboard().setVisible(true);
         }

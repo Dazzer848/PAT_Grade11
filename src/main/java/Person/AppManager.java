@@ -18,13 +18,18 @@ public class AppManager {
     
     public static void init(){
         try {
+            //Connects to the Database
             DB.connect();
         } catch (ClassNotFoundException ex) {
+            
+            System.out.println("The class could not be found. Pleasse contact a techy");
             Logger.getLogger(AppManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            System.out.println("An error occured during the SQL process, this is fatal and needs to be resolved");
             Logger.getLogger(AppManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(pm == null){
+            //Creates a new AppManager
             pm = new PersonManager();
         }
     }

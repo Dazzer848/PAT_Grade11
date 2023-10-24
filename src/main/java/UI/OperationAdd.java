@@ -20,6 +20,9 @@ public class OperationAdd extends javax.swing.JFrame {
      */
     public OperationAdd() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
         returnHome.setVisible(false);
     }
 
@@ -161,16 +164,21 @@ public class OperationAdd extends javax.swing.JFrame {
     private void AddOperationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddOperationButtonActionPerformed
         try {
             
+            //Creates the Operation Manager class
             OperationManager manager = new OperationManager();
             
-           boolean createdOperation = manager.createOperation(3, NameInputTextField, BriefingDisplayInputField, EquipmentNeededInputField, rendezvousTextField);
+          // Checks to see if the Boolean is true that can create operation
+           boolean createdOperation = manager.createOperation(NameInputTextField, BriefingDisplayInputField, EquipmentNeededInputField, rendezvousTextField);
            
+           
+           //Error checking
            if(createdOperation == false){
                DisplayTextArea.setText("Am error occured during the proscess");
            }
            if(createdOperation == true){
                DisplayTextArea.setText("Operation created succcesfully");
                returnHome.setVisible(true);
+               AddOperationButton.setVisible(false);
                
            }
             
@@ -183,7 +191,7 @@ public class OperationAdd extends javax.swing.JFrame {
     }//GEN-LAST:event_AddOperationButtonActionPerformed
 
     private void returnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnHomeActionPerformed
-        // TODO add your handling code here:
+        new UserDashboard().setVisible(true);
     }//GEN-LAST:event_returnHomeActionPerformed
 
     /**

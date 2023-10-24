@@ -17,6 +17,9 @@ public class PaymentToOrg extends javax.swing.JFrame {
      */
     public PaymentToOrg() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
         ReturnHome.setVisible(false);
     }
 
@@ -97,8 +100,11 @@ public class PaymentToOrg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DonateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DonateButtonActionPerformed
+        
+        // Gets the boolean of the Payment status and checks if the payment went through
         boolean paymentStatus = PersonManager.payMarauderSquad(Integer.parseInt(AmountToDonate.getText()));
         
+        //Populates the UI upon successful payment
         if(paymentStatus == true){
             DonationHeader.setText(" Thank you so much kind citizen!");
             ReturnHome.setVisible(true);
@@ -109,7 +115,7 @@ public class PaymentToOrg extends javax.swing.JFrame {
 
     private void ReturnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnHomeActionPerformed
         dispose();
-        //new UserDashboard.setVisible(true);
+        new UserDashboard().setVisible(true);
     }//GEN-LAST:event_ReturnHomeActionPerformed
 
     /**

@@ -22,6 +22,9 @@ public class CreateAccountScreen extends javax.swing.JFrame {
      */
     public CreateAccountScreen() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        //Creates the app manager
         AppManager.init();
     }
 
@@ -122,10 +125,18 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EnlistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnlistButtonActionPerformed
-       boolean canCreateAccount = PersonManager.canCreateAccount(UsernameTextField, PasswordTextField, ConfirmPasswordtextField);
+       
+        //Gets the boolean returned from the PersonManager canCreateAccount ( see PersonManager )
+        boolean canCreateAccount = PersonManager.canCreateAccount(UsernameTextField, PasswordTextField, ConfirmPasswordtextField);
+        
+        //Checks to see if the boolean is returned true
        if(canCreateAccount == true){
+           
+           //Uses the new PersonManager account ( see PersonManager )
            PersonManager.createNewAccount(UsernameTextField.getText(), PasswordTextField.getText());
            AppManager.pm.setCurrentUser(UsernameTextField.getText());
+           
+           //Disposes this screen and makes the new screen visible
            dispose();
            new UserDashboard().setVisible(true);
        }

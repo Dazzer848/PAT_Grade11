@@ -8,9 +8,13 @@ import Operation.OperationManager;
 import Person.AppManager;
 import Person.Person;
 import Person.PersonManager;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 
 /**
  *
@@ -24,18 +28,27 @@ public class UserDashboard extends javax.swing.JFrame {
     public UserDashboard() {
         try {
             initComponents();
+            
+            setLocationRelativeTo(null);
+            
+            //Initializes the AppManager features
             AppManager.init();
             
             adminManageButton.setVisible(false);
             
+            //Sets the Current user
             Person currentUser = AppManager.pm.getCurrentUser();
             headerLabel.setText("-------------------------------------- Welcome " + currentUser.getUsername() + "---------------------------------");
             
+            //Checks to see if the admin Account is logged in
             if(currentUser.getUsername().equals("MarauderSquadron")){
                 adminManageButton.setVisible(true);
             }
             
+            //Initialses the Operation manager
             OperationManager manager = new OperationManager();
+            
+            //Populates the Operations button
             manager.populateOperationsButtons(JButton1, JButton2, JButton3, JButton4, JButton5, JButton6);
             
         } catch (ClassNotFoundException ex) {
@@ -44,6 +57,7 @@ public class UserDashboard extends javax.swing.JFrame {
             Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,11 +78,12 @@ public class UserDashboard extends javax.swing.JFrame {
         JButton1 = new javax.swing.JButton();
         PaymentsPanel = new javax.swing.JPanel();
         orgAccountPaymentButton = new javax.swing.JButton();
-        TradeGoodsSoldButton = new javax.swing.JButton();
-        SubdryAccountButton = new javax.swing.JButton();
-        ORGdonationButton = new javax.swing.JButton();
-        PaymentToAccountantButton = new javax.swing.JButton();
+        SummaryOperation = new javax.swing.JButton();
         adminManageButton = new javax.swing.JButton();
+        addOperationButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        IDofOperation = new javax.swing.JLabel();
+        SummaryOfOperationID = new javax.swing.JTextField();
         PaymentCalculatorPanel = new javax.swing.JPanel();
         PaymentCalculatorHeaderLabel = new javax.swing.JLabel();
         TotalInLabel = new javax.swing.JLabel();
@@ -176,13 +191,12 @@ public class UserDashboard extends javax.swing.JFrame {
             }
         });
 
-        TradeGoodsSoldButton.setText("Log Trade goods sold");
-
-        SubdryAccountButton.setText("Sundry Payments");
-
-        ORGdonationButton.setText("ORG ACCOUNT DONATION");
-
-        PaymentToAccountantButton.setText("Payment to Accountant");
+        SummaryOperation.setText("Summary Of Operation");
+        SummaryOperation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SummaryOperationActionPerformed(evt);
+            }
+        });
 
         adminManageButton.setText("Manage Users");
         adminManageButton.addActionListener(new java.awt.event.ActionListener() {
@@ -191,37 +205,73 @@ public class UserDashboard extends javax.swing.JFrame {
             }
         });
 
+        addOperationButton.setText("add Operation");
+        addOperationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addOperationButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("LOG OUT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        IDofOperation.setText("ID:");
+
         javax.swing.GroupLayout PaymentsPanelLayout = new javax.swing.GroupLayout(PaymentsPanel);
         PaymentsPanel.setLayout(PaymentsPanelLayout);
         PaymentsPanelLayout.setHorizontalGroup(
             PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaymentsPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(orgAccountPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TradeGoodsSoldButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SubdryAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ORGdonationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(PaymentToAccountantButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminManageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                        .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(orgAccountPaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                                        .addComponent(IDofOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(SummaryOfOperationID, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(SummaryOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                                .addComponent(addOperationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+            .addGroup(PaymentsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(adminManageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PaymentsPanelLayout.setVerticalGroup(
             PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaymentsPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(20, 20, 20)
                 .addComponent(orgAccountPaymentButton)
-                .addGap(33, 33, 33)
-                .addComponent(TradeGoodsSoldButton)
-                .addGap(31, 31, 31)
-                .addComponent(SubdryAccountButton)
-                .addGap(36, 36, 36)
-                .addComponent(ORGdonationButton)
-                .addGap(42, 42, 42)
-                .addComponent(PaymentToAccountantButton)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(PaymentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IDofOperation)
+                    .addComponent(SummaryOfOperationID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(SummaryOperation)
+                .addGap(38, 38, 38)
+                .addComponent(addOperationButton)
+                .addGap(27, 27, 27)
                 .addComponent(adminManageButton)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addComponent(jButton1)
+                .addGap(22, 22, 22))
         );
 
         PaymentCalculatorPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -284,7 +334,7 @@ public class UserDashboard extends javax.swing.JFrame {
                                     .addComponent(NumberOfUsersIntextField)
                                     .addComponent(MarauderSquadInTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(DividerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(DividerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                     .addGroup(PaymentCalculatorPanelLayout.createSequentialGroup()
                         .addGroup(PaymentCalculatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TotalProfitsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,8 +396,8 @@ public class UserDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(OperationsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(PaymentsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addComponent(PaymentsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(PaymentCalculatorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -371,18 +421,19 @@ public class UserDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_TotalInTextFieldActionPerformed
 
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        //Uses the calculator method
         calculator(Integer.parseInt(TotalInTextField.getText()), Integer.parseInt(NumberOfUsersIntextField.getText()), Integer.parseInt(MarauderSquadInTextField.getText()));
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
     private void JButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton6ActionPerformed
-        int ID = 6;
-        new Operation().setVisible(true);
+
+        new Operation(JButton6.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_JButton6ActionPerformed
 
     private void JButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton1ActionPerformed
-        int ID = 1;
-        new Operation().setVisible(true);
+
+        new Operation(JButton1.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_JButton1ActionPerformed
 
@@ -397,33 +448,66 @@ public class UserDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_adminManageButtonActionPerformed
 
     private void JButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton3ActionPerformed
-        int ID = 3;
-        new Operation().setVisible(true);
+
+        new Operation(JButton3.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_JButton3ActionPerformed
 
     private void JButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton2ActionPerformed
-        int ID = 2;
-        new Operation().setVisible(true);
+
+        new Operation(JButton2.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_JButton2ActionPerformed
 
     private void JButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton4ActionPerformed
-        int ID = 4;
-        new Operation().setVisible(true);
+
+        new Operation(JButton4.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_JButton4ActionPerformed
 
     private void JButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton5ActionPerformed
-         int ID = 5;
-        new Operation().setVisible(true);
+
+        new Operation(JButton5.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_JButton5ActionPerformed
+
+    private void addOperationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOperationButtonActionPerformed
+        new OperationAdd().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_addOperationButtonActionPerformed
+
+    private void SummaryOperationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SummaryOperationActionPerformed
+        try {                                                  
+            try {
+                
+                //Creates the PrintWriter which will write the ID of the Operation the user is looking for to sumarise.
+                PrintWriter writer = new PrintWriter(new File("SummaryOfOperation.txt"));
+                
+                //Writes the Operation ID to the textfile
+                writer.write(SummaryOfOperationID.getText());
+                
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            new OperationSummary().setVisible(true);
+            dispose();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SummaryOperationActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new LogIN().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) {    
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -456,15 +540,20 @@ public class UserDashboard extends javax.swing.JFrame {
     }
 
     public void calculator(int total, int numberOfUser, int marauderSquadronCut) {
+        
+        //Gets the fields required
         int totalProfits = 0;
         int PaymentPerUser = 0;
         int PaymentToMaruader = 0;
-
+        
+        //Accounting section
         totalProfits = (int) (total - (total * 0.005));
 
         PaymentToMaruader = (int) (totalProfits * marauderSquadronCut);
         PaymentPerUser = (totalProfits - PaymentToMaruader) / numberOfUser;
 
+        
+        //Sets the text to the requried fields
         TotalProfitsOutTextField.setText(totalProfits + "");
         PaymentToMarauderOut.setText(PaymentToMaruader + "");
         PaymentPerUserOutTextField.setText(PaymentPerUser + "");
@@ -473,6 +562,7 @@ public class UserDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CalculateButton;
     private javax.swing.JLabel DividerLabel;
+    private javax.swing.JLabel IDofOperation;
     private javax.swing.JButton JButton1;
     private javax.swing.JButton JButton2;
     private javax.swing.JButton JButton3;
@@ -483,24 +573,24 @@ public class UserDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel MarauderSquadronLabel;
     private javax.swing.JTextField NumberOfUsersIntextField;
     private javax.swing.JLabel NumberOfUsersLabel;
-    private javax.swing.JButton ORGdonationButton;
     private javax.swing.JPanel OperationsPanel;
     private javax.swing.JLabel PaymentCalculatorHeaderLabel;
     private javax.swing.JPanel PaymentCalculatorPanel;
     private javax.swing.JLabel PaymentPerUserLabel;
     private javax.swing.JTextField PaymentPerUserOutTextField;
-    private javax.swing.JButton PaymentToAccountantButton;
     private javax.swing.JTextField PaymentToMarauderOut;
     private javax.swing.JLabel PaymentToMarauderSquadron;
     private javax.swing.JPanel PaymentsPanel;
-    private javax.swing.JButton SubdryAccountButton;
+    private javax.swing.JTextField SummaryOfOperationID;
+    private javax.swing.JButton SummaryOperation;
     private javax.swing.JLabel TotalInLabel;
     private javax.swing.JTextField TotalInTextField;
     private javax.swing.JLabel TotalProfitsLabel;
     private javax.swing.JTextField TotalProfitsOutTextField;
-    private javax.swing.JButton TradeGoodsSoldButton;
+    private javax.swing.JButton addOperationButton;
     private javax.swing.JButton adminManageButton;
     private javax.swing.JLabel headerLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton orgAccountPaymentButton;
     // End of variables declaration//GEN-END:variables
 }
